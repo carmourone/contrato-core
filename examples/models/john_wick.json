@@ -1,0 +1,442 @@
+{
+  "format_version": 1,
+  "tenant": {
+    "name": "demo"
+  },
+  "model": {
+    "status": "enabled",
+    "change_note": "John Wick universe demo model"
+  },
+  "types": [
+    {
+      "domain": "contract",
+      "name": "expense_approval"
+    },
+    {
+      "domain": "contract",
+      "name": "service_recovery"
+    },
+    {
+      "domain": "contract_action",
+      "name": "allow"
+    },
+    {
+      "domain": "contract_action",
+      "name": "defer"
+    },
+    {
+      "domain": "contract_action",
+      "name": "delegate"
+    },
+    {
+      "domain": "contract_action",
+      "name": "deny"
+    },
+    {
+      "domain": "contract_action",
+      "name": "escalate"
+    },
+    {
+      "domain": "contract_action",
+      "name": "require_approval"
+    },
+    {
+      "domain": "edge",
+      "name": "applies_to"
+    },
+    {
+      "domain": "edge",
+      "name": "depends_on"
+    },
+    {
+      "domain": "edge",
+      "name": "governs"
+    },
+    {
+      "domain": "edge",
+      "name": "owns"
+    },
+    {
+      "domain": "edge",
+      "name": "provides"
+    },
+    {
+      "domain": "edge",
+      "name": "requires"
+    },
+    {
+      "domain": "node",
+      "name": "actor"
+    },
+    {
+      "domain": "node",
+      "name": "capability"
+    },
+    {
+      "domain": "node",
+      "name": "person"
+    },
+    {
+      "domain": "node",
+      "name": "policy"
+    },
+    {
+      "domain": "node",
+      "name": "runbook"
+    },
+    {
+      "domain": "node",
+      "name": "service"
+    },
+    {
+      "domain": "obligation",
+      "name": "create_approval_task"
+    },
+    {
+      "domain": "obligation",
+      "name": "escalate_to_human"
+    },
+    {
+      "domain": "obligation",
+      "name": "log"
+    },
+    {
+      "domain": "obligation",
+      "name": "notify"
+    }
+  ],
+  "statuses": [
+    {
+      "domain": "contract",
+      "name": "active"
+    },
+    {
+      "domain": "contract",
+      "name": "fulfilled"
+    },
+    {
+      "domain": "contract",
+      "name": "in_progress"
+    },
+    {
+      "domain": "contract",
+      "name": "request"
+    },
+    {
+      "domain": "model_version",
+      "name": "disabled"
+    },
+    {
+      "domain": "model_version",
+      "name": "draft"
+    },
+    {
+      "domain": "model_version",
+      "name": "enabled"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "bee939b2-e3a8-4513-9988-20dd3c032b71",
+      "type": "person",
+      "blob": {
+        "name": "John Wick",
+        "role": "assassin"
+      }
+    },
+    {
+      "id": "a5cb477a-bf7e-4797-93a3-d816f46c765b",
+      "type": "service",
+      "blob": {
+        "name": "The Continental",
+        "rule": "no business on premises"
+      }
+    },
+    {
+      "id": "96f4ff9f-66b0-447c-a020-ae4a66258426",
+      "type": "runbook",
+      "blob": {
+        "name": "Marker obligation",
+        "rule": "debt must be honoured"
+      }
+    },
+    {
+      "id": "d2ccc444-b14b-4d9c-af60-b854b9dbcca5",
+      "type": "service",
+      "blob": {
+        "name": "High Table",
+        "power": "absolute"
+      }
+    },
+    {
+      "id": "2a0f48d0-0b30-46c8-b252-87094211ac98",
+      "type": "policy",
+      "blob": {
+        "name": "Continental Rules",
+        "ref": "policy:continental-rules:v1",
+        "rule": "no business on premises",
+        "engine": "opa",
+        "bundle": "policies/continental.tar.gz",
+        "opa": {
+          "package": "contrato.policies.policy_continental_rules_v1",
+          "rule": "decision",
+          "input_schema": {
+            "tenant_id": "uuid",
+            "actor": {
+              "id": "uuid",
+              "type": "string",
+              "roles": [
+                "string"
+              ]
+            },
+            "subject": {
+              "id": "uuid",
+              "type": "string"
+            },
+            "action": {
+              "requested": "string",
+              "context": {
+                "type": "object"
+              }
+            },
+            "resource": {
+              "id": "uuid",
+              "type": "string",
+              "attrs": {
+                "type": "object"
+              }
+            },
+            "time": "rfc3339"
+          },
+          "output_schema": {
+            "action": "string",
+            "obligations": [
+              {
+                "name": "string",
+                "params": {
+                  "type": "object"
+                }
+              }
+            ],
+            "reasons": [
+              "string"
+            ]
+          },
+          "decision_examples": [
+            {
+              "input": {
+                "action": {
+                  "requested": "conduct_business",
+                  "context": {
+                    "location": "continental"
+                  }
+                }
+              },
+              "output": {
+                "action": "deny",
+                "obligations": [
+                  {
+                    "name": "notify",
+                    "params": {
+                      "channel": "management"
+                    }
+                  }
+                ],
+                "reasons": [
+                  "JW-NO-BIZ"
+                ]
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "19a00016-fd98-453a-b2d6-fc190e467de5",
+      "type": "actor",
+      "blob": {
+        "name": "Actor",
+        "ref": "actor:default",
+        "source_node_id": "bee939b2-e3a8-4513-9988-20dd3c032b71"
+      }
+    },
+    {
+      "id": "14aa28a8-5563-4600-a2b5-9c3578be57f5",
+      "type": "capability",
+      "blob": {
+        "name": "Continental Rules",
+        "ref": "cap:continental_rules",
+        "job": "Evaluate actions under Continental rules",
+        "version": "v1"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from_id": "bee939b2-e3a8-4513-9988-20dd3c032b71",
+      "to_id": "a5cb477a-bf7e-4797-93a3-d816f46c765b",
+      "type": "depends_on",
+      "blob": {
+        "sanctuary": true
+      }
+    },
+    {
+      "from_id": "96f4ff9f-66b0-447c-a020-ae4a66258426",
+      "to_id": "bee939b2-e3a8-4513-9988-20dd3c032b71",
+      "type": "owns",
+      "blob": {
+        "binds": true
+      }
+    },
+    {
+      "from_id": "d2ccc444-b14b-4d9c-af60-b854b9dbcca5",
+      "to_id": "a5cb477a-bf7e-4797-93a3-d816f46c765b",
+      "type": "owns",
+      "blob": {
+        "enforces": "rules"
+      }
+    },
+    {
+      "from_id": "2a0f48d0-0b30-46c8-b252-87094211ac98",
+      "to_id": "a5cb477a-bf7e-4797-93a3-d816f46c765b",
+      "type": "applies_to",
+      "blob": {
+        "scope": "location"
+      }
+    },
+    {
+      "from_id": "19a00016-fd98-453a-b2d6-fc190e467de5",
+      "to_id": "14aa28a8-5563-4600-a2b5-9c3578be57f5",
+      "type": "provides",
+      "blob": {
+        "mode": "human_or_system"
+      }
+    },
+    {
+      "from_id": "14aa28a8-5563-4600-a2b5-9c3578be57f5",
+      "to_id": "a5cb477a-bf7e-4797-93a3-d816f46c765b",
+      "type": "requires",
+      "blob": {
+        "role": "target"
+      }
+    },
+    {
+      "from_id": "2a0f48d0-0b30-46c8-b252-87094211ac98",
+      "to_id": "14aa28a8-5563-4600-a2b5-9c3578be57f5",
+      "type": "governs",
+      "blob": {
+        "scope": "capability"
+      }
+    }
+  ],
+  "properties": [
+    {
+      "owner_type": "node",
+      "owner_id": "2a0f48d0-0b30-46c8-b252-87094211ac98",
+      "key": "reason_codes",
+      "value": {
+        "JW-NO-BIZ": "No business on Continental premises",
+        "JW-MARKER": "Marker obligation applies",
+        "JW-TABLE": "High Table escalation"
+      }
+    },
+    {
+      "owner_type": "node",
+      "owner_id": "2a0f48d0-0b30-46c8-b252-87094211ac98",
+      "key": "contract_actions",
+      "value": [
+        "allow",
+        "deny",
+        "defer",
+        "delegate",
+        "require_approval",
+        "escalate"
+      ]
+    },
+    {
+      "owner_type": "node",
+      "owner_id": "2a0f48d0-0b30-46c8-b252-87094211ac98",
+      "key": "obligations_supported",
+      "value": [
+        "log",
+        "notify",
+        "create_approval_task",
+        "escalate_to_human"
+      ]
+    },
+    {
+      "owner_type": "node",
+      "owner_id": "14aa28a8-5563-4600-a2b5-9c3578be57f5",
+      "key": "capability.reliability",
+      "value_float": 0.85
+    },
+    {
+      "owner_type": "node",
+      "owner_id": "14aa28a8-5563-4600-a2b5-9c3578be57f5",
+      "key": "capability.latency_p95_ms",
+      "value_int": 250
+    }
+  ],
+  "contracts": [
+    {
+      "type": "assassination",
+      "status": "fulfilled",
+      "action": "allow",
+      "blob": {
+        "issuer": "high_table",
+        "target": "Viggo Tarasov",
+        "bounty_usd": 4779098
+      }
+    },
+    {
+      "type": "assassination",
+      "status": "fulfilled",
+      "action": "allow",
+      "blob": {
+        "issuer": "high_table",
+        "target": "Santino D'Antonio",
+        "bounty_usd": 6782864
+      }
+    },
+    {
+      "type": "assassination",
+      "status": "fulfilled",
+      "action": "allow",
+      "blob": {
+        "issuer": "high_table",
+        "target": "Gianna D'Antonio",
+        "bounty_usd": 5981249
+      }
+    },
+    {
+      "type": "assassination",
+      "status": "fulfilled",
+      "action": "allow",
+      "blob": {
+        "issuer": "high_table",
+        "target": "Cassian",
+        "bounty_usd": 4941911
+      }
+    },
+    {
+      "type": "assassination",
+      "status": "fulfilled",
+      "action": "allow",
+      "blob": {
+        "issuer": "high_table",
+        "target": "Zero",
+        "bounty_usd": 3443260
+      }
+    },
+    {
+      "type": "assassination",
+      "status": "fulfilled",
+      "action": "allow",
+      "blob": {
+        "issuer": "high_table",
+        "target": "The Adjudicator",
+        "bounty_usd": 1273802
+      }
+    }
+  ]
+}

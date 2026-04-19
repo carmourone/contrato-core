@@ -1,0 +1,216 @@
+{
+  "format_version": 1,
+  "tenant": {
+    "name": "demo"
+  },
+  "model": {
+    "status": "enabled",
+    "change_note": "Core ontology v0.1 bootstrap"
+  },
+  "types": [
+    {
+      "domain": "contract_action",
+      "name": "allow"
+    },
+    {
+      "domain": "contract_action",
+      "name": "defer"
+    },
+    {
+      "domain": "contract_action",
+      "name": "delegate"
+    },
+    {
+      "domain": "contract_action",
+      "name": "deny"
+    },
+    {
+      "domain": "contract_action",
+      "name": "escalate"
+    },
+    {
+      "domain": "contract_action",
+      "name": "require_approval"
+    },
+    {
+      "domain": "edge",
+      "name": "applies_to"
+    },
+    {
+      "domain": "edge",
+      "name": "depends_on"
+    },
+    {
+      "domain": "edge",
+      "name": "governs"
+    },
+    {
+      "domain": "edge",
+      "name": "invokes"
+    },
+    {
+      "domain": "edge",
+      "name": "owns"
+    },
+    {
+      "domain": "edge",
+      "name": "provides"
+    },
+    {
+      "domain": "edge",
+      "name": "requires"
+    },
+    {
+      "domain": "node",
+      "name": "actor"
+    },
+    {
+      "domain": "node",
+      "name": "capability"
+    },
+    {
+      "domain": "node",
+      "name": "person"
+    },
+    {
+      "domain": "node",
+      "name": "policy"
+    },
+    {
+      "domain": "node",
+      "name": "resource"
+    },
+    {
+      "domain": "node",
+      "name": "runbook"
+    },
+    {
+      "domain": "node",
+      "name": "service"
+    },
+    {
+      "domain": "node",
+      "name": "team"
+    },
+    {
+      "domain": "obligation",
+      "name": "create_approval_task"
+    },
+    {
+      "domain": "obligation",
+      "name": "escalate_to_human"
+    },
+    {
+      "domain": "obligation",
+      "name": "log"
+    },
+    {
+      "domain": "obligation",
+      "name": "notify"
+    }
+  ],
+  "statuses": [
+    {
+      "domain": "contract",
+      "name": "active"
+    },
+    {
+      "domain": "contract",
+      "name": "cancelled"
+    },
+    {
+      "domain": "contract",
+      "name": "expired"
+    },
+    {
+      "domain": "contract",
+      "name": "failed"
+    },
+    {
+      "domain": "contract",
+      "name": "fulfilled"
+    },
+    {
+      "domain": "contract",
+      "name": "in_progress"
+    },
+    {
+      "domain": "contract",
+      "name": "paused"
+    },
+    {
+      "domain": "contract",
+      "name": "rejected"
+    },
+    {
+      "domain": "contract",
+      "name": "request"
+    },
+    {
+      "domain": "model_version",
+      "name": "disabled"
+    },
+    {
+      "domain": "model_version",
+      "name": "draft"
+    },
+    {
+      "domain": "model_version",
+      "name": "enabled"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "75cb15f8-31cc-4479-8d9e-8b9867ffe2be",
+      "type": "actor",
+      "blob": {
+        "name": "System",
+        "ref": "actor:system",
+        "kind": "system"
+      }
+    },
+    {
+      "id": "a9cbd1fd-83df-481b-b089-2b68ad6e69d2",
+      "type": "capability",
+      "blob": {
+        "name": "No-op capability",
+        "ref": "cap:noop",
+        "job": "Accept and record a contract request",
+        "version": "v0.1"
+      }
+    },
+    {
+      "id": "647439d7-337f-478a-abf2-ef8531e9152a",
+      "type": "policy",
+      "blob": {
+        "name": "Default allow policy",
+        "ref": "policy:default-allow:v1",
+        "engine": "opa",
+        "opa": {
+          "package": "contrato.policies.default_allow",
+          "rule": "decision"
+        }
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from_id": "75cb15f8-31cc-4479-8d9e-8b9867ffe2be",
+      "to_id": "a9cbd1fd-83df-481b-b089-2b68ad6e69d2",
+      "type": "provides",
+      "blob": {
+        "mode": "builtin"
+      }
+    },
+    {
+      "from_id": "647439d7-337f-478a-abf2-ef8531e9152a",
+      "to_id": "a9cbd1fd-83df-481b-b089-2b68ad6e69d2",
+      "type": "governs",
+      "blob": {
+        "scope": "capability"
+      }
+    }
+  ],
+  "properties": [],
+  "metrics": []
+}

@@ -1,0 +1,389 @@
+{
+  "format_version": 1,
+  "tenant": {
+    "name": "demo"
+  },
+  "model": {
+    "status": "enabled",
+    "change_note": "Service recovery demo model"
+  },
+  "types": [
+    {
+      "domain": "contract",
+      "name": "expense_approval"
+    },
+    {
+      "domain": "contract",
+      "name": "service_recovery"
+    },
+    {
+      "domain": "contract_action",
+      "name": "allow"
+    },
+    {
+      "domain": "contract_action",
+      "name": "defer"
+    },
+    {
+      "domain": "contract_action",
+      "name": "delegate"
+    },
+    {
+      "domain": "contract_action",
+      "name": "deny"
+    },
+    {
+      "domain": "contract_action",
+      "name": "escalate"
+    },
+    {
+      "domain": "contract_action",
+      "name": "require_approval"
+    },
+    {
+      "domain": "edge",
+      "name": "applies_to"
+    },
+    {
+      "domain": "edge",
+      "name": "depends_on"
+    },
+    {
+      "domain": "edge",
+      "name": "governs"
+    },
+    {
+      "domain": "edge",
+      "name": "owns"
+    },
+    {
+      "domain": "edge",
+      "name": "provides"
+    },
+    {
+      "domain": "edge",
+      "name": "requires"
+    },
+    {
+      "domain": "node",
+      "name": "actor"
+    },
+    {
+      "domain": "node",
+      "name": "capability"
+    },
+    {
+      "domain": "node",
+      "name": "person"
+    },
+    {
+      "domain": "node",
+      "name": "policy"
+    },
+    {
+      "domain": "node",
+      "name": "runbook"
+    },
+    {
+      "domain": "node",
+      "name": "service"
+    },
+    {
+      "domain": "obligation",
+      "name": "create_approval_task"
+    },
+    {
+      "domain": "obligation",
+      "name": "escalate_to_human"
+    },
+    {
+      "domain": "obligation",
+      "name": "log"
+    },
+    {
+      "domain": "obligation",
+      "name": "notify"
+    }
+  ],
+  "statuses": [
+    {
+      "domain": "contract",
+      "name": "active"
+    },
+    {
+      "domain": "contract",
+      "name": "fulfilled"
+    },
+    {
+      "domain": "contract",
+      "name": "in_progress"
+    },
+    {
+      "domain": "contract",
+      "name": "request"
+    },
+    {
+      "domain": "model_version",
+      "name": "disabled"
+    },
+    {
+      "domain": "model_version",
+      "name": "draft"
+    },
+    {
+      "domain": "model_version",
+      "name": "enabled"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "eabe314a-6326-4a63-9f64-eb34efa10ee7",
+      "type": "service",
+      "blob": {
+        "name": "Payments API",
+        "tier": "critical"
+      }
+    },
+    {
+      "id": "7c3b1e71-50d1-4c28-bacc-9896cb02d388",
+      "type": "service",
+      "blob": {
+        "name": "Postgres Cluster",
+        "tier": "critical"
+      }
+    },
+    {
+      "id": "8987c7d6-77e0-4ad2-b1a7-82462bd36e26",
+      "type": "runbook",
+      "blob": {
+        "name": "Payments recovery runbook",
+        "url": "https://example/runbooks/payments"
+      }
+    },
+    {
+      "id": "937532dd-4335-4e13-994d-0e27b806514f",
+      "type": "person",
+      "blob": {
+        "name": "On-call SRE",
+        "team": "platform"
+      }
+    },
+    {
+      "id": "dad594fd-18af-4522-bfb3-ef06e6fcc944",
+      "type": "policy",
+      "blob": {
+        "name": "Service Recovery Policy",
+        "ref": "policy:service-recovery:v1",
+        "engine": "opa",
+        "bundle": "policies/service_recovery.tar.gz",
+        "opa": {
+          "package": "contrato.policies.policy_service_recovery_v1",
+          "rule": "decision",
+          "input_schema": {
+            "tenant_id": "uuid",
+            "actor": {
+              "id": "uuid",
+              "type": "string",
+              "roles": [
+                "string"
+              ]
+            },
+            "subject": {
+              "id": "uuid",
+              "type": "string"
+            },
+            "action": {
+              "requested": "string",
+              "context": {
+                "type": "object"
+              }
+            },
+            "resource": {
+              "id": "uuid",
+              "type": "string",
+              "attrs": {
+                "type": "object"
+              }
+            },
+            "time": "rfc3339"
+          },
+          "output_schema": {
+            "action": "string",
+            "obligations": [
+              {
+                "name": "string",
+                "params": {
+                  "type": "object"
+                }
+              }
+            ],
+            "reasons": [
+              "string"
+            ]
+          },
+          "decision_examples": [
+            {
+              "input": {
+                "action": {
+                  "requested": "recover_service"
+                }
+              },
+              "output": {
+                "action": "require_approval",
+                "obligations": [
+                  {
+                    "name": "create_approval_task",
+                    "params": {
+                      "queue": "sre_oncall"
+                    }
+                  }
+                ],
+                "reasons": [
+                  "SRV-ESCALATE"
+                ]
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "abb83b48-ee17-40d5-89a5-7d2a4183b0a9",
+      "type": "actor",
+      "blob": {
+        "name": "Actor",
+        "ref": "actor:default",
+        "source_node_id": "937532dd-4335-4e13-994d-0e27b806514f"
+      }
+    },
+    {
+      "id": "1988934a-6139-46d2-a638-eecccaadd5cb",
+      "type": "capability",
+      "blob": {
+        "name": "Service Recovery",
+        "ref": "cap:service_recovery",
+        "job": "Recover a degraded service to healthy state",
+        "version": "v1"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from_id": "eabe314a-6326-4a63-9f64-eb34efa10ee7",
+      "to_id": "7c3b1e71-50d1-4c28-bacc-9896cb02d388",
+      "type": "depends_on",
+      "blob": {
+        "latency_budget_ms": 250
+      }
+    },
+    {
+      "from_id": "8987c7d6-77e0-4ad2-b1a7-82462bd36e26",
+      "to_id": "eabe314a-6326-4a63-9f64-eb34efa10ee7",
+      "type": "owns",
+      "blob": {
+        "role": "recovery"
+      }
+    },
+    {
+      "from_id": "dad594fd-18af-4522-bfb3-ef06e6fcc944",
+      "to_id": "eabe314a-6326-4a63-9f64-eb34efa10ee7",
+      "type": "applies_to",
+      "blob": {
+        "scope": "service"
+      }
+    },
+    {
+      "from_id": "abb83b48-ee17-40d5-89a5-7d2a4183b0a9",
+      "to_id": "1988934a-6139-46d2-a638-eecccaadd5cb",
+      "type": "provides",
+      "blob": {
+        "mode": "human_or_system"
+      }
+    },
+    {
+      "from_id": "1988934a-6139-46d2-a638-eecccaadd5cb",
+      "to_id": "eabe314a-6326-4a63-9f64-eb34efa10ee7",
+      "type": "requires",
+      "blob": {
+        "role": "target"
+      }
+    },
+    {
+      "from_id": "dad594fd-18af-4522-bfb3-ef06e6fcc944",
+      "to_id": "1988934a-6139-46d2-a638-eecccaadd5cb",
+      "type": "governs",
+      "blob": {
+        "scope": "capability"
+      }
+    }
+  ],
+  "properties": [
+    {
+      "owner_type": "node",
+      "owner_id": "eabe314a-6326-4a63-9f64-eb34efa10ee7",
+      "key": "slo",
+      "value": {
+        "availability_target": "99.9",
+        "window": "30d"
+      }
+    },
+    {
+      "owner_type": "node",
+      "owner_id": "dad594fd-18af-4522-bfb3-ef06e6fcc944",
+      "key": "reason_codes",
+      "value": {
+        "SRV-OK": "Service meets recovery criteria",
+        "SRV-UNKNOWN": "Insufficient data; defer decision",
+        "SRV-ESCALATE": "Escalate to on-call human"
+      }
+    },
+    {
+      "owner_type": "node",
+      "owner_id": "dad594fd-18af-4522-bfb3-ef06e6fcc944",
+      "key": "contract_actions",
+      "value": [
+        "allow",
+        "deny",
+        "defer",
+        "delegate",
+        "require_approval",
+        "escalate"
+      ]
+    },
+    {
+      "owner_type": "node",
+      "owner_id": "dad594fd-18af-4522-bfb3-ef06e6fcc944",
+      "key": "obligations_supported",
+      "value": [
+        "log",
+        "notify",
+        "create_approval_task",
+        "escalate_to_human"
+      ]
+    },
+    {
+      "owner_type": "node",
+      "owner_id": "eabe314a-6326-4a63-9f64-eb34efa10ee7",
+      "key": "p95_latency_ms",
+      "value_float": 123.4
+    },
+    {
+      "owner_type": "node",
+      "owner_id": "eabe314a-6326-4a63-9f64-eb34efa10ee7",
+      "key": "error_rate",
+      "value_float": 0.012
+    },
+    {
+      "owner_type": "node",
+      "owner_id": "1988934a-6139-46d2-a638-eecccaadd5cb",
+      "key": "capability.reliability",
+      "value_float": 0.85
+    },
+    {
+      "owner_type": "node",
+      "owner_id": "1988934a-6139-46d2-a638-eecccaadd5cb",
+      "key": "capability.latency_p95_ms",
+      "value_int": 250
+    }
+  ]
+}

@@ -1,0 +1,372 @@
+{
+  "format_version": 1,
+  "tenant": {
+    "name": "demo"
+  },
+  "model": {
+    "status": "enabled",
+    "change_note": "Expense approval demo model"
+  },
+  "types": [
+    {
+      "domain": "contract",
+      "name": "expense_approval"
+    },
+    {
+      "domain": "contract",
+      "name": "service_recovery"
+    },
+    {
+      "domain": "contract_action",
+      "name": "allow"
+    },
+    {
+      "domain": "contract_action",
+      "name": "defer"
+    },
+    {
+      "domain": "contract_action",
+      "name": "delegate"
+    },
+    {
+      "domain": "contract_action",
+      "name": "deny"
+    },
+    {
+      "domain": "contract_action",
+      "name": "escalate"
+    },
+    {
+      "domain": "contract_action",
+      "name": "require_approval"
+    },
+    {
+      "domain": "edge",
+      "name": "applies_to"
+    },
+    {
+      "domain": "edge",
+      "name": "depends_on"
+    },
+    {
+      "domain": "edge",
+      "name": "governs"
+    },
+    {
+      "domain": "edge",
+      "name": "owns"
+    },
+    {
+      "domain": "edge",
+      "name": "provides"
+    },
+    {
+      "domain": "edge",
+      "name": "requires"
+    },
+    {
+      "domain": "node",
+      "name": "actor"
+    },
+    {
+      "domain": "node",
+      "name": "capability"
+    },
+    {
+      "domain": "node",
+      "name": "person"
+    },
+    {
+      "domain": "node",
+      "name": "policy"
+    },
+    {
+      "domain": "node",
+      "name": "runbook"
+    },
+    {
+      "domain": "node",
+      "name": "service"
+    },
+    {
+      "domain": "obligation",
+      "name": "create_approval_task"
+    },
+    {
+      "domain": "obligation",
+      "name": "escalate_to_human"
+    },
+    {
+      "domain": "obligation",
+      "name": "log"
+    },
+    {
+      "domain": "obligation",
+      "name": "notify"
+    }
+  ],
+  "statuses": [
+    {
+      "domain": "contract",
+      "name": "active"
+    },
+    {
+      "domain": "contract",
+      "name": "fulfilled"
+    },
+    {
+      "domain": "contract",
+      "name": "in_progress"
+    },
+    {
+      "domain": "contract",
+      "name": "request"
+    },
+    {
+      "domain": "model_version",
+      "name": "disabled"
+    },
+    {
+      "domain": "model_version",
+      "name": "draft"
+    },
+    {
+      "domain": "model_version",
+      "name": "enabled"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "7239a8da-cd97-497b-ac80-ee2cc2d28dc6",
+      "type": "person",
+      "blob": {
+        "name": "Employee",
+        "role": "staff"
+      }
+    },
+    {
+      "id": "26e5e365-ceae-4f1a-acae-8c1588c8e54f",
+      "type": "person",
+      "blob": {
+        "name": "Manager",
+        "role": "approver"
+      }
+    },
+    {
+      "id": "a219efce-7173-4e74-a635-41d32db744be",
+      "type": "service",
+      "blob": {
+        "name": "Cost Centre 1234",
+        "budget": 50000
+      }
+    },
+    {
+      "id": "361034f6-9c3b-4268-bfab-a310556d9784",
+      "type": "policy",
+      "blob": {
+        "name": "Expense Approval Policy",
+        "ref": "policy:expense-approval:v1",
+        "engine": "opa",
+        "bundle": "policies/expense_approval.tar.gz",
+        "opa": {
+          "package": "contrato.policies.policy_expense_approval_v1",
+          "rule": "decision",
+          "input_schema": {
+            "tenant_id": "uuid",
+            "actor": {
+              "id": "uuid",
+              "type": "string",
+              "roles": [
+                "string"
+              ]
+            },
+            "subject": {
+              "id": "uuid",
+              "type": "string"
+            },
+            "action": {
+              "requested": "string",
+              "context": {
+                "type": "object"
+              }
+            },
+            "resource": {
+              "id": "uuid",
+              "type": "string",
+              "attrs": {
+                "type": "object"
+              }
+            },
+            "time": "rfc3339"
+          },
+          "output_schema": {
+            "action": "string",
+            "obligations": [
+              {
+                "name": "string",
+                "params": {
+                  "type": "object"
+                }
+              }
+            ],
+            "reasons": [
+              "string"
+            ]
+          },
+          "decision_examples": [
+            {
+              "input": {
+                "action": {
+                  "requested": "approve_expense",
+                  "context": {
+                    "amount": 100
+                  }
+                }
+              },
+              "output": {
+                "action": "allow",
+                "obligations": [
+                  {
+                    "name": "log",
+                    "params": {
+                      "level": "info"
+                    }
+                  }
+                ],
+                "reasons": [
+                  "EXP-AUTO"
+                ]
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "bd2014a4-14a1-4793-9853-53e2c3f1db5e",
+      "type": "actor",
+      "blob": {
+        "name": "Actor",
+        "ref": "actor:default",
+        "source_node_id": "7239a8da-cd97-497b-ac80-ee2cc2d28dc6"
+      }
+    },
+    {
+      "id": "a2543a5d-6e8a-47e9-ac83-fc3251cc80fe",
+      "type": "capability",
+      "blob": {
+        "name": "Expense Approval",
+        "ref": "cap:expense_approval",
+        "job": "Evaluate and decide on an expense approval request",
+        "version": "v1"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from_id": "7239a8da-cd97-497b-ac80-ee2cc2d28dc6",
+      "to_id": "26e5e365-ceae-4f1a-acae-8c1588c8e54f",
+      "type": "owns",
+      "blob": {
+        "relation": "reports_to"
+      }
+    },
+    {
+      "from_id": "26e5e365-ceae-4f1a-acae-8c1588c8e54f",
+      "to_id": "a219efce-7173-4e74-a635-41d32db744be",
+      "type": "owns",
+      "blob": {
+        "relation": "approves_spend_for"
+      }
+    },
+    {
+      "from_id": "361034f6-9c3b-4268-bfab-a310556d9784",
+      "to_id": "a219efce-7173-4e74-a635-41d32db744be",
+      "type": "applies_to",
+      "blob": {
+        "scope": "cost_center"
+      }
+    },
+    {
+      "from_id": "bd2014a4-14a1-4793-9853-53e2c3f1db5e",
+      "to_id": "a2543a5d-6e8a-47e9-ac83-fc3251cc80fe",
+      "type": "provides",
+      "blob": {
+        "mode": "human_or_system"
+      }
+    },
+    {
+      "from_id": "a2543a5d-6e8a-47e9-ac83-fc3251cc80fe",
+      "to_id": "a219efce-7173-4e74-a635-41d32db744be",
+      "type": "requires",
+      "blob": {
+        "role": "target"
+      }
+    },
+    {
+      "from_id": "361034f6-9c3b-4268-bfab-a310556d9784",
+      "to_id": "a2543a5d-6e8a-47e9-ac83-fc3251cc80fe",
+      "type": "governs",
+      "blob": {
+        "scope": "capability"
+      }
+    }
+  ],
+  "properties": [
+    {
+      "owner_type": "node",
+      "owner_id": "a219efce-7173-4e74-a635-41d32db744be",
+      "key": "limits",
+      "value": {
+        "expense_auto_approve_under": 250,
+        "requires_finance_over": 5000
+      }
+    },
+    {
+      "owner_type": "node",
+      "owner_id": "361034f6-9c3b-4268-bfab-a310556d9784",
+      "key": "reason_codes",
+      "value": {
+        "EXP-AUTO": "Below auto-approve threshold",
+        "EXP-MGR": "Requires manager approval",
+        "EXP-FIN": "Requires finance approval"
+      }
+    },
+    {
+      "owner_type": "node",
+      "owner_id": "361034f6-9c3b-4268-bfab-a310556d9784",
+      "key": "contract_actions",
+      "value": [
+        "allow",
+        "deny",
+        "defer",
+        "delegate",
+        "require_approval",
+        "escalate"
+      ]
+    },
+    {
+      "owner_type": "node",
+      "owner_id": "361034f6-9c3b-4268-bfab-a310556d9784",
+      "key": "obligations_supported",
+      "value": [
+        "log",
+        "notify",
+        "create_approval_task",
+        "escalate_to_human"
+      ]
+    },
+    {
+      "owner_type": "node",
+      "owner_id": "a2543a5d-6e8a-47e9-ac83-fc3251cc80fe",
+      "key": "capability.reliability",
+      "value_float": 0.85
+    },
+    {
+      "owner_type": "node",
+      "owner_id": "a2543a5d-6e8a-47e9-ac83-fc3251cc80fe",
+      "key": "capability.latency_p95_ms",
+      "value_int": 250
+    }
+  ]
+}

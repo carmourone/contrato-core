@@ -2,11 +2,9 @@ package app
 
 import (
 	"context"
-	"database/sql"
 	"errors"
 	"fmt"
 	"net/http"
-	"os"
 
 	_ "github.com/jackc/pgx/v5/stdlib"
 
@@ -16,6 +14,7 @@ import (
 	"contrato/internal/authz"
 	authznoop "contrato/internal/authz/providers/noop"
 	"contrato/internal/config"
+	"contrato/internal/migrate"
 	"contrato/internal/storage"
 	pg "contrato/internal/storage/drivers/postgres"
 )
@@ -52,7 +51,7 @@ func New(ctx context.Context, cfg config.Config) (*App, error) {
 		return nil, fmt.Errorf("unknown authz provider %q", cfg.AuthZ.Provider)
 	}
 
-	drv := pg.Driver{Migrate: migrateFromFile("migrations/postgres/0004_init_append_only.sql")}
+	drv := pg.Driver{Migrate: migrate.Run}
 	st, err := drv.Open(ctx, map[string]any{"dsn": cfg.PostgresDSN})
 	if err != nil {
 		return nil, err
@@ -70,15 +69,4 @@ func (a *App) Close() error {
 		_ = a.store.Close()
 	}
 	return nil
-}
-
-func migrateFromFile(path string) func(ctx context.Context, db *sql.DB) error {
-	return func(ctx context.Context, db *sql.DB) error {
-		b, err := os.ReadFile(path)
-		if err != nil {
-			return err
-		}
-		_, err = db.ExecContext(ctx, string(b))
-		return err
-	}
 }

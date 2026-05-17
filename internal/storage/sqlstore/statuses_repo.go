@@ -12,11 +12,13 @@ type StatusesRepo struct{ q querier }
 func (r *StatusesRepo) Create(ctx context.Context, s storage.Status) (storage.Status, error) {
 	row := r.q.QueryRowContext(ctx, `
 INSERT INTO statuses(tenant_id, domain, name) VALUES($1,$2,$3)
-ON CONFLICT (tenant_id, domain, name) DO NOTHING
+ON CONFLICT (tenant_id, domain, name) DO UPDATE SET name=EXCLUDED.name
 RETURNING tenant_id, domain, name
 `, s.TenantID, s.Domain, s.Name)
 	var out storage.Status
-	if err := row.Scan(&out.TenantID, &out.Domain, &out.Name); err != nil { return storage.Status{}, err }
+	if err := row.Scan(&out.TenantID, &out.Domain, &out.Name); err != nil {
+		return storage.Status{}, err
+	}
 	return out, nil
 }
 

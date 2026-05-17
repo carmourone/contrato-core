@@ -24,3 +24,22 @@ func (s *Store) Tenants() storage.TenantRepo             { return &TenantsRepo{q
 func (s *Store) Types() storage.TypeRepo                 { return &TypesRepo{q: s.db} }
 func (s *Store) Statuses() storage.StatusRepo            { return &StatusesRepo{q: s.db} }
 func (s *Store) Properties() storage.PropertyRepo        { return &PropertiesRepo{q: s.db} }
+func (s *Store) ModelVersions() storage.ModelVersionRepo { return &ModelVersionsRepo{q: s.db} }
+func (s *Store) Contracts() storage.ContractRepo         { return &ContractsRepo{q: s.db} }
+func (s *Store) Objects() storage.ObjectRepo             { return &ObjectsRepo{q: s.db} }
+func (s *Store) Graph() storage.GraphRepo                { return &GraphRepo{q: s.db} }
+
+func (s *Store) BeginTx(ctx context.Context, opts storage.TxOptions) (storage.Tx, error) {
+	var cancel context.CancelFunc
+	if opts.Timeout > 0 {
+		ctx, cancel = context.WithTimeout(ctx, opts.Timeout)
+	}
+	tx, err := s.db.BeginTx(ctx, &sql.TxOptions{ReadOnly: opts.ReadOnly})
+	if err != nil {
+		if cancel != nil {
+			cancel()
+		}
+		return nil, err
+	}
+	return &Tx{tx: tx, cap: s.cap, cancel: cancel}, nil
+}

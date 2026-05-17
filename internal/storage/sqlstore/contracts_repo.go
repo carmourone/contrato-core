@@ -38,18 +38,18 @@ func (r *ContractsRepo) Put(ctx context.Context, rec storage.ContractRecord, opt
 	if rec.Status == "" { return storage.ContractRecord{}, errors.New("status required") }
 	if len(rec.Blob) == 0 { rec.Blob = []byte(`{}`) }
 
-	if rec.ID == "" {
-		if rec.ModelID == "" || rec.ModelVersion == 0 {
-			mv, err := (&ModelVersionsRepo{q: r.q}).GetLatestEnabled(ctx, rec.TenantID)
-			if err != nil { return storage.ContractRecord{}, errors.New("model_id/model_version required (no enabled model)") }
-			rec.ModelID, rec.ModelVersion = mv.ModelID, mv.Version
-		}
+	if rec.ModelID == "" || rec.ModelVersion == 0 {
+		mv, err := (&ModelVersionsRepo{q: r.q}).GetLatestEnabled(ctx, rec.TenantID)
+		if err != nil { return storage.ContractRecord{}, errors.New("model_id/model_version required (no enabled model)") }
+		rec.ModelID, rec.ModelVersion = mv.ModelID, mv.Version
+	}
 
+	if rec.ID == "" {
 		row := r.q.QueryRowContext(ctx, `
 INSERT INTO contracts(tenant_id, domain, type, status, action, model_id, model_version, version, blob)
 VALUES($1,$2,$3,$4,$5,$6,$7,1,$8)
 RETURNING tenant_id, id, domain, type, status, action, model_id, model_version, version, blob, created_at
-`, rec.TenantID, rec.Domain, rec.Type, rec.Status, rec.Action, rec.ModelID, rec.ModelVersion, rec.Blob)
+`, rec.TenantID, rec.Domain, rec.Type, rec.Status, nullableString(rec.Action), rec.ModelID, rec.ModelVersion, rec.Blob)
 		return scanContract(row)
 	}
 
@@ -58,12 +58,6 @@ RETURNING tenant_id, id, domain, type, status, action, model_id, model_version, 
 		latest, err := scanNullInt(row)
 		if err != nil { return storage.ContractRecord{}, err }
 		if latest != *opts.ExpectedVersion { return storage.ContractRecord{}, storage.ErrConflict }
-	}
-
-	if rec.ModelID == "" || rec.ModelVersion == 0 {
-		mv, err := (&ModelVersionsRepo{q: r.q}).GetLatestEnabled(ctx, rec.TenantID)
-		if err != nil { return storage.ContractRecord{}, errors.New("model_id/model_version required (no enabled model)") }
-		rec.ModelID, rec.ModelVersion = mv.ModelID, mv.Version
 	}
 
 	row := r.q.QueryRowContext(ctx, `
@@ -76,7 +70,7 @@ INSERT INTO contracts(tenant_id, id, domain, type, status, action, model_id, mod
 SELECT $1,$2,$3,$4,$5,$6,$7,$8, next.v, $9
 FROM next
 RETURNING tenant_id, id, domain, type, status, action, model_id, model_version, version, blob, created_at
-`, rec.TenantID, rec.ID, rec.Domain, rec.Type, rec.Status, rec.Action, rec.ModelID, rec.ModelVersion, rec.Blob)
+`, rec.TenantID, rec.ID, rec.Domain, rec.Type, rec.Status, nullableString(rec.Action), rec.ModelID, rec.ModelVersion, rec.Blob)
 	return scanContract(row)
 }
 
@@ -87,7 +81,7 @@ func (r *ContractsRepo) ListByType(ctx context.Context, tenantID, domain, typ st
 
 	rows, err := r.q.QueryContext(ctx, `
 SELECT DISTINCT ON (tenant_id, id)
-  tenant_id, id, domain, type, status, version, blob, created_at
+  tenant_id, id, domain, type, status, action, model_id, model_version, version, blob, created_at
 FROM contracts
 WHERE tenant_id=$1 AND domain=$2 AND type=$3
 ORDER BY tenant_id, id, version DESC
@@ -100,9 +94,11 @@ LIMIT $4
 	for rows.Next() {
 		var rec storage.ContractRecord
 		var created time.Time
-		if err := rows.Scan(&rec.TenantID, &rec.ID, &rec.Domain, &rec.Type, &rec.Status, &rec.Version, &rec.Blob, &created); err != nil {
+		var action sql.NullString
+		if err := rows.Scan(&rec.TenantID, &rec.ID, &rec.Domain, &rec.Type, &rec.Status, &action, &rec.ModelID, &rec.ModelVersion, &rec.Version, &rec.Blob, &created); err != nil {
 			return nil, "", err
 		}
+		if action.Valid { rec.Action = action.String }
 		rec.CreatedAt = created
 		recs = append(recs, rec)
 	}
@@ -113,10 +109,17 @@ LIMIT $4
 func scanContract(row *sql.Row) (storage.ContractRecord, error) {
 	var rec storage.ContractRecord
 	var created time.Time
-	if err := row.Scan(&rec.TenantID, &rec.ID, &rec.Domain, &rec.Type, &rec.Status, &rec.Action, &rec.ModelID, &rec.ModelVersion, &rec.Version, &rec.Blob, &created); err != nil {
+	var action sql.NullString
+	if err := row.Scan(&rec.TenantID, &rec.ID, &rec.Domain, &rec.Type, &rec.Status, &action, &rec.ModelID, &rec.ModelVersion, &rec.Version, &rec.Blob, &created); err != nil {
 		if err == sql.ErrNoRows { return storage.ContractRecord{}, storage.ErrNotFound }
 		return storage.ContractRecord{}, err
 	}
+	if action.Valid { rec.Action = action.String }
 	rec.CreatedAt = created
 	return rec, nil
+}
+
+func nullableString(s string) sql.NullString {
+	if s == "" { return sql.NullString{} }
+	return sql.NullString{String: s, Valid: true}
 }

@@ -19,15 +19,7 @@ WHERE tenant_id=$1 AND id=$2
 ORDER BY version DESC
 LIMIT 1
 `, tenantID, id)
-
-	var n storage.Node
-	var created time.Time
-	if err := row.Scan(&n.TenantID, &n.ID, &n.Domain, &n.Type, &n.ModelID, &n.ModelVersion, &n.Version, &n.Blob, &created); err != nil {
-		if err == sql.ErrNoRows { return storage.Node{}, storage.ErrNotFound }
-		return storage.Node{}, err
-	}
-	n.CreatedAt = created
-	return n, nil
+	return scanNode(row)
 }
 
 func (r *GraphRepo) PutNode(ctx context.Context, n storage.Node, opts storage.PutOptions) (storage.Node, error) {
@@ -46,7 +38,7 @@ func (r *GraphRepo) PutNode(ctx context.Context, n storage.Node, opts storage.Pu
 		row := r.q.QueryRowContext(ctx, `
 INSERT INTO graph_nodes(tenant_id, domain, type, model_id, model_version, version, blob)
 VALUES($1,$2,$3,$4,$5,1,$6)
-RETURNING tenant_id, id, domain, type, version, blob, created_at
+RETURNING tenant_id, id, domain, type, model_id, model_version, version, blob, created_at
 `, n.TenantID, n.Domain, n.Type, n.ModelID, n.ModelVersion, n.Blob)
 		return scanNode(row)
 	}
@@ -67,7 +59,7 @@ WITH next AS (
 INSERT INTO graph_nodes(tenant_id, id, domain, type, model_id, model_version, version, blob)
 SELECT $1,$2,$3,$4,$5,$6, next.v, $7
 FROM next
-RETURNING tenant_id, id, domain, type, version, blob, created_at
+RETURNING tenant_id, id, domain, type, model_id, model_version, version, blob, created_at
 `, n.TenantID, n.ID, n.Domain, n.Type, n.ModelID, n.ModelVersion, n.Blob)
 	return scanNode(row)
 }
@@ -107,7 +99,6 @@ SELECT $1,$2,$3,$4,$5,$6,$7, next.v, $8
 FROM next
 RETURNING tenant_id, from_id, to_id, domain, type, model_id, model_version, version, blob, created_at
 `, e.TenantID, e.FromID, e.ToID, e.Domain, e.Type, e.ModelID, e.ModelVersion, e.Blob)
-
 	return scanEdge(row)
 }
 
@@ -118,7 +109,7 @@ func (r *GraphRepo) OutEdges(ctx context.Context, tenantID, fromID, domain, typ 
 
 	rows, err := r.q.QueryContext(ctx, `
 SELECT DISTINCT ON (tenant_id, from_id, to_id, domain, type)
-  tenant_id, from_id, to_id, domain, type, version, blob, created_at
+  tenant_id, from_id, to_id, domain, type, model_id, model_version, version, blob, created_at
 FROM graph_edges
 WHERE tenant_id=$1 AND from_id=$2 AND domain=$3 AND type=$4
 ORDER BY tenant_id, from_id, to_id, domain, type, version DESC

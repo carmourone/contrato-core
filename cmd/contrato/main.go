@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"database/sql"
 	"encoding/json"
 	"flag"
 	"log"
@@ -13,6 +12,7 @@ import (
 
 	"contrato/internal/app"
 	"contrato/internal/config"
+	"contrato/internal/migrate"
 	"contrato/internal/modelio"
 	pg "contrato/internal/storage/drivers/postgres"
 )
@@ -33,10 +33,25 @@ func main() {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
-	// CLI import/export mode
-	if *importPath != "" || *exportPath != "" || *lintPath != "" || *bootstrapPath != "" {
+	if *lintPath != "" {
+		raw, err := os.ReadFile(*lintPath)
+		if err != nil {
+			log.Fatalf("lint read failed: %v", err)
+		}
+		var b modelio.Bundle
+		if err := json.Unmarshal(raw, &b); err != nil {
+			log.Fatalf("lint parse failed: %v", err)
+		}
+		rep := modelio.LintBundle(b, modelio.LintModeEnabledModel)
+		if !rep.OK {
+			log.Fatalf("lint failed:\n%s", rep.JSON())
+		}
+		log.Printf("lint ok")
+		return
+	}
 
-		drv := pg.Driver{Migrate: migrateFromFile("migrations/postgres/0004_init_append_only.sql")}
+	if *importPath != "" || *exportPath != "" || *bootstrapPath != "" {
+		drv := pg.Driver{Migrate: migrate.Run}
 		store, err := drv.Open(ctx, map[string]any{"dsn": cfg.PostgresDSN})
 		if err != nil {
 			log.Fatalf("failed to open store: %v", err)
@@ -48,41 +63,46 @@ func main() {
 			log.Fatalf("store does not support export/import")
 		}
 
-
-if *lintPath != "" {
-	raw, err := os.ReadFile(*lintPath)
-	if err != nil { log.Fatalf("lint read failed: %v", err) }
-	var b modelio.Bundle
-	if err := json.Unmarshal(raw, &b); err != nil { log.Fatalf("lint parse failed: %v", err) }
-	rep := modelio.LintBundle(b, modelio.LintModeEnabledModel)
-	if !rep.OK { log.Fatalf("lint failed:\n%s", rep.JSON()) }
-	log.Printf("lint ok")
-	return
-}
-
-if *bootstrapPath != "" {
-	raw, err := os.ReadFile(*bootstrapPath)
-	if err != nil { log.Fatalf("bootstrap read failed: %v", err) }
-	var b modelio.Bundle
-	if err := json.Unmarshal(raw, &b); err != nil { log.Fatalf("bootstrap parse failed: %v", err) }
-	rep := modelio.LintBundle(b, modelio.LintModeBootstrap)
-	if !rep.OK { log.Fatalf("bootstrap lint failed:\n%s", rep.JSON()) }
-	err = modelio.ImportBundle(ctx, swd, modelio.Options{TenantName: *tenant, InputPath: *bootstrapPath, EnableImported: true, ChangeNote: *note, WithContracts: *withContracts})
-	if err != nil { log.Fatalf("bootstrap import failed: %v", err) }
-	log.Printf("bootstrapped tenant/model from %s", *bootstrapPath)
-	return
-}
+		if *bootstrapPath != "" {
+			raw, err := os.ReadFile(*bootstrapPath)
+			if err != nil {
+				log.Fatalf("bootstrap read failed: %v", err)
+			}
+			var b modelio.Bundle
+			if err := json.Unmarshal(raw, &b); err != nil {
+				log.Fatalf("bootstrap parse failed: %v", err)
+			}
+			rep := modelio.LintBundle(b, modelio.LintModeBootstrap)
+			if !rep.OK {
+				log.Fatalf("bootstrap lint failed:\n%s", rep.JSON())
+			}
+			err = modelio.ImportBundle(ctx, swd, modelio.Options{
+				TenantName: *tenant, InputPath: *bootstrapPath,
+				EnableImported: true, ChangeNote: *note, WithContracts: *withContracts,
+			})
+			if err != nil {
+				log.Fatalf("bootstrap import failed: %v", err)
+			}
+			log.Printf("bootstrapped tenant/model from %s", *bootstrapPath)
+			return
+		}
 
 		if *exportPath != "" {
-			err := modelio.ExportLatestEnabled(ctx, swd, modelio.Options{TenantName: *tenant, OutputPath: *exportPath, WithContracts: *withContracts})
+			err := modelio.ExportLatestEnabled(ctx, swd, modelio.Options{
+				TenantName: *tenant, OutputPath: *exportPath, WithContracts: *withContracts,
+			})
 			if err != nil {
 				log.Fatalf("export failed: %v", err)
 			}
 			log.Printf("exported model bundle to %s", *exportPath)
 			return
 		}
+
 		if *importPath != "" {
-			err := modelio.ImportBundle(ctx, swd, modelio.Options{TenantName: *tenant, InputPath: *importPath, EnableImported: *enable, ChangeNote: *note, WithContracts: *withContracts})
+			err := modelio.ImportBundle(ctx, swd, modelio.Options{
+				TenantName: *tenant, InputPath: *importPath,
+				EnableImported: *enable, ChangeNote: *note, WithContracts: *withContracts,
+			})
 			if err != nil {
 				log.Fatalf("import failed: %v", err)
 			}
@@ -114,15 +134,4 @@ if *bootstrapPath != "" {
 	defer shutdownCancel()
 	_ = srv.Shutdown(shutdownCtx)
 	cancel()
-}
-
-func migrateFromFile(path string) func(ctx context.Context, db *sql.DB) error {
-	return func(ctx context.Context, db *sql.DB) error {
-		b, err := os.ReadFile(path)
-		if err != nil {
-			return err
-		}
-		_, err = db.ExecContext(ctx, string(b))
-		return err
-	}
 }

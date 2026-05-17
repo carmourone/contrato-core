@@ -4,6 +4,7 @@ import (
 	"context"
 	"net/http"
 
+	"contrato/internal/api/httpapi/respond"
 	"contrato/internal/authn"
 	"contrato/internal/authz"
 )
@@ -12,32 +13,38 @@ type ctxKey string
 
 const authnKey ctxKey = "authnctx"
 
-func withAuth(an authn.Provider, az authz.Engine, next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		ctx := r.Context()
+func withAuth(an authn.Provider, az authz.Engine) func(http.Handler) http.Handler {
+	return func(next http.Handler) http.Handler {
+		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			// skip auth for health check
+			if r.URL.Path == "/health" {
+				next.ServeHTTP(w, r)
+				return
+			}
 
-		ac, err := an.Authenticate(ctx, r)
-		if err != nil {
-			w.WriteHeader(http.StatusUnauthorized)
-			_, _ = w.Write([]byte("unauthorized"))
-			return
-		}
+			ctx := r.Context()
 
-		dec, err := az.Check(ctx, authz.CheckRequest{
-			Subject:  authz.Subject{Type: ac.Actor.Type, ID: ac.Actor.ID},
-			Relation: "access",
-			Object:   authz.Object{Type: "system", ID: "contrato"},
-			Context:  map[string]any{"path": r.URL.Path, "method": r.Method},
+			ac, err := an.Authenticate(ctx, r)
+			if err != nil {
+				respond.Error(w, http.StatusUnauthorized, "unauthorized")
+				return
+			}
+
+			dec, err := az.Check(ctx, authz.CheckRequest{
+				Subject:  authz.Subject{Type: ac.Actor.Type, ID: ac.Actor.ID},
+				Relation: "access",
+				Object:   authz.Object{Type: "system", ID: "contrato"},
+				Context:  map[string]any{"path": r.URL.Path, "method": r.Method},
+			})
+			if err != nil || !dec.Allowed {
+				respond.Error(w, http.StatusForbidden, "forbidden")
+				return
+			}
+
+			ctx = context.WithValue(ctx, authnKey, ac)
+			next.ServeHTTP(w, r.WithContext(ctx))
 		})
-		if err != nil || !dec.Allowed {
-			w.WriteHeader(http.StatusForbidden)
-			_, _ = w.Write([]byte("forbidden"))
-			return
-		}
-
-		ctx = context.WithValue(ctx, authnKey, ac)
-		next.ServeHTTP(w, r.WithContext(ctx))
-	})
+	}
 }
 
 func AuthnFromContext(ctx context.Context) (authn.Context, bool) {

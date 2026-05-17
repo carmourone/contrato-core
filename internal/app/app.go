@@ -57,8 +57,9 @@ func New(ctx context.Context, cfg config.Config) (*App, error) {
 		return nil, err
 	}
 
+	features := cfg.License.Features()
 	a := &App{cfg: cfg, store: st, authn: an, authz: az}
-	a.http = httpapi.NewServer(cfg.HTTPAddr, st, an, az)
+	a.http = httpapi.NewServer(cfg.HTTPAddr, st, an, az, features)
 	return a, nil
 }
 

@@ -11,6 +11,7 @@ type Config struct {
 	PostgresDSN string
 	AuthN       AuthNConfig
 	AuthZ       AuthZConfig
+	License     LicenseConfig
 }
 
 type AuthNConfig struct {
@@ -22,6 +23,30 @@ type AuthZConfig struct {
 	NoopAllow bool
 }
 
+// LicenseConfig controls which product personas are active.
+// Key="" enables all features (developer mode).
+// A non-empty key will be validated against an embedded public key; the
+// signed payload declares which personas are permitted.
+type LicenseConfig struct {
+	Key string
+}
+
+// Features is the resolved set of enabled personas derived from the license.
+type Features struct {
+	Frontier bool
+	Waypoint bool
+	Meridian bool
+}
+
+func (lc LicenseConfig) Features() Features {
+	if lc.Key == "" {
+		// developer mode: all personas enabled
+		return Features{Frontier: true, Waypoint: true, Meridian: true}
+	}
+	// TODO: parse and verify JWT license key, extract persona claims
+	return Features{Frontier: true, Waypoint: true, Meridian: true}
+}
+
 func FromEnv() Config {
 	return Config{
 		Env:         getEnv("CONTRATO_ENV", "dev"),
@@ -31,6 +56,9 @@ func FromEnv() Config {
 		AuthZ: AuthZConfig{
 			Provider:  getEnv("CONTRATO_AUTHZ_PROVIDER", "noop"),
 			NoopAllow: getEnvBool("CONTRATO_AUTHZ_NOOP_ALLOW", false),
+		},
+		License: LicenseConfig{
+			Key: getEnv("CONTRATO_LICENSE_KEY", ""),
 		},
 	}
 }

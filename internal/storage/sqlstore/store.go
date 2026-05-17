@@ -28,6 +28,7 @@ func (s *Store) ModelVersions() storage.ModelVersionRepo { return &ModelVersions
 func (s *Store) Contracts() storage.ContractRepo         { return &ContractsRepo{q: s.db} }
 func (s *Store) Objects() storage.ObjectRepo             { return &ObjectsRepo{q: s.db} }
 func (s *Store) Graph() storage.GraphRepo                { return &GraphRepo{q: s.db} }
+func (s *Store) Embeddings() storage.EmbeddingRepo       { return &EmbeddingsRepo{q: s.db} }
 
 func (s *Store) BeginTx(ctx context.Context, opts storage.TxOptions) (storage.Tx, error) {
 	var cancel context.CancelFunc

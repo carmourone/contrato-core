@@ -5,3051 +5,376 @@
   },
   "model": {
     "status": "enabled",
-    "change_note": "Moneyball analytics-driven team building"
+    "change_note": "2002 Oakland A's — Waypoint capability gap demo"
   },
   "types": [
-    {
-      "domain": "contract_action",
-      "name": "allow"
-    },
-    {
-      "domain": "contract_action",
-      "name": "defer"
-    },
-    {
-      "domain": "contract_action",
-      "name": "delegate"
-    },
-    {
-      "domain": "contract_action",
-      "name": "deny"
-    },
-    {
-      "domain": "contract_action",
-      "name": "escalate"
-    },
-    {
-      "domain": "contract_action",
-      "name": "require_approval"
-    },
-    {
-      "domain": "edge",
-      "name": "applies_to"
-    },
-    {
-      "domain": "edge",
-      "name": "candidate_for"
-    },
-    {
-      "domain": "edge",
-      "name": "governs"
-    },
-    {
-      "domain": "edge",
-      "name": "owns"
-    },
-    {
-      "domain": "edge",
-      "name": "provides"
-    },
-    {
-      "domain": "edge",
-      "name": "requires"
-    },
-    {
-      "domain": "node",
-      "name": "actor"
-    },
-    {
-      "domain": "node",
-      "name": "capability"
-    },
-    {
-      "domain": "node",
-      "name": "person"
-    },
-    {
-      "domain": "node",
-      "name": "player"
-    },
-    {
-      "domain": "node",
-      "name": "policy"
-    },
-    {
-      "domain": "node",
-      "name": "team"
-    },
-    {
-      "domain": "obligation",
-      "name": "create_approval_task"
-    },
-    {
-      "domain": "obligation",
-      "name": "escalate_to_human"
-    },
-    {
-      "domain": "obligation",
-      "name": "log"
-    },
-    {
-      "domain": "obligation",
-      "name": "notify"
-    }
+    { "domain": "contract",        "name": "player_contract" },
+    { "domain": "contract",        "name": "player_departure" },
+    { "domain": "contract_action", "name": "allow" },
+    { "domain": "contract_action", "name": "defer" },
+    { "domain": "contract_action", "name": "delegate" },
+    { "domain": "contract_action", "name": "deny" },
+    { "domain": "contract_action", "name": "escalate" },
+    { "domain": "contract_action", "name": "require_approval" },
+    { "domain": "edge",            "name": "applies_to" },
+    { "domain": "edge",            "name": "can_delegate_to" },
+    { "domain": "edge",            "name": "candidate_for" },
+    { "domain": "edge",            "name": "governs" },
+    { "domain": "edge",            "name": "owns" },
+    { "domain": "edge",            "name": "provides" },
+    { "domain": "edge",            "name": "requires" },
+    { "domain": "node",            "name": "actor" },
+    { "domain": "node",            "name": "capability" },
+    { "domain": "node",            "name": "person" },
+    { "domain": "node",            "name": "player" },
+    { "domain": "node",            "name": "policy" },
+    { "domain": "node",            "name": "team" },
+    { "domain": "obligation",      "name": "create_approval_task" },
+    { "domain": "obligation",      "name": "escalate_to_human" },
+    { "domain": "obligation",      "name": "log" },
+    { "domain": "obligation",      "name": "notify" }
   ],
   "statuses": [
-    {
-      "domain": "model_version",
-      "name": "draft"
-    },
-    {
-      "domain": "model_version",
-      "name": "enabled"
-    },
-    {
-      "domain": "model_version",
-      "name": "disabled"
-    },
-    {
-      "domain": "contract",
-      "name": "request"
-    },
-    {
-      "domain": "contract",
-      "name": "active"
-    },
-    {
-      "domain": "contract",
-      "name": "in_progress"
-    },
-    {
-      "domain": "contract",
-      "name": "fulfilled"
-    }
+    { "domain": "contract",      "name": "active" },
+    { "domain": "contract",      "name": "fulfilled" },
+    { "domain": "contract",      "name": "in_progress" },
+    { "domain": "contract",      "name": "request" },
+    { "domain": "model_version", "name": "disabled" },
+    { "domain": "model_version", "name": "draft" },
+    { "domain": "model_version", "name": "enabled" }
   ],
   "nodes": [
     {
-      "id": "426ad2b9-51e1-474b-a9da-38df2daa26f9",
+      "id": "bbbb0001-0000-0000-0000-000000000001",
       "type": "person",
-      "blob": {
-        "name": "Billy Beane",
-        "role": "GM",
-        "ref": "person:billy-beane"
-      }
+      "blob": { "name": "Billy Beane",       "role": "General Manager",     "ref": "person:billy-beane" }
     },
     {
-      "id": "da3b25e2-d8ab-4afb-8824-e0fc780be956",
+      "id": "bbbb0001-0000-0000-0000-000000000002",
       "type": "person",
-      "blob": {
-        "name": "Peter Brand",
-        "role": "Analyst",
-        "ref": "person:peter-brand"
-      }
+      "blob": { "name": "Paul DePodesta",    "role": "Assistant GM / Analyst", "ref": "person:paul-depodesta" }
     },
     {
-      "id": "73506d38-2587-41ef-be06-7b1be8017d1f",
+      "id": "bbbb0001-0000-0000-0000-000000000003",
+      "type": "person",
+      "blob": { "name": "Art Howe",          "role": "Manager",             "ref": "person:art-howe" }
+    },
+    {
+      "id": "bbbb0001-0000-0000-0000-000000000010",
       "type": "team",
-      "blob": {
-        "name": "Oakland A's",
-        "ref": "team:oakland-as"
-      }
+      "blob": { "name": "Oakland Athletics", "ref": "team:oakland-as",      "season": 2002, "payroll_rank": 28 }
     },
     {
-      "id": "a0f420e3-f6a9-4ac6-9c7b-2d2125cd646f",
+      "id": "bbbb0001-0000-0000-0000-000000000020",
+      "type": "player",
+      "blob": { "name": "Scott Hatteberg", "position": "1B",     "bats": "L", "season": 2002, "obp": 0.389, "salary_musd": 0.95,  "note": "signed to replace Jason Giambi" }
+    },
+    {
+      "id": "bbbb0001-0000-0000-0000-000000000021",
+      "type": "player",
+      "blob": { "name": "David Justice",   "position": "OF/DH",  "bats": "L", "season": 2002, "obp": 0.376, "salary_musd": 3.25,  "note": "veteran signed on market value inefficiency" }
+    },
+    {
+      "id": "bbbb0001-0000-0000-0000-000000000022",
+      "type": "player",
+      "blob": { "name": "Jeremy Giambi",  "position": "1B/DH",  "bats": "L", "season": 2002, "obp": 0.383, "salary_musd": 1.0,   "note": "Jason's brother, acquired from KC" }
+    },
+    {
+      "id": "bbbb0001-0000-0000-0000-000000000023",
+      "type": "player",
+      "blob": { "name": "Chad Bradford",  "position": "RP",     "throws": "R", "season": 2002, "whip": 0.97, "era": 2.72, "salary_musd": 0.32, "style": "submarine arm angle", "note": "extreme ground ball pitcher, undervalued" }
+    },
+    {
+      "id": "bbbb0001-0000-0000-0000-000000000024",
+      "type": "player",
+      "blob": { "name": "Tim Hudson",     "position": "SP",     "throws": "R", "season": 2002, "wins": 15, "whip": 1.15, "era": 2.98, "salary_musd": 3.5 }
+    },
+    {
+      "id": "bbbb0001-0000-0000-0000-000000000025",
+      "type": "player",
+      "blob": { "name": "Barry Zito",     "position": "SP",     "throws": "L", "season": 2002, "wins": 23, "whip": 1.10, "era": 2.75, "salary_musd": 2.5,  "note": "AL Cy Young 2002" }
+    },
+    {
+      "id": "bbbb0001-0000-0000-0000-000000000026",
+      "type": "player",
+      "blob": { "name": "Mark Mulder",    "position": "SP",     "throws": "L", "season": 2002, "wins": 19, "whip": 1.18, "era": 3.47, "salary_musd": 1.1 }
+    },
+    {
+      "id": "bbbb0001-0000-0000-0000-000000000027",
+      "type": "player",
+      "blob": { "name": "Miguel Tejada",  "position": "SS",     "bats": "R", "season": 2002, "obp": 0.354, "hr": 34, "salary_musd": 5.0, "note": "AL MVP 2002" }
+    },
+    {
+      "id": "bbbb0001-0000-0000-0000-000000000028",
+      "type": "player",
+      "blob": { "name": "Eric Chavez",    "position": "3B",     "bats": "L", "season": 2002, "obp": 0.329, "hr": 34, "salary_musd": 3.4 }
+    },
+    {
+      "id": "bbbb0001-0000-0000-0000-000000000040",
+      "type": "actor",
+      "blob": { "name": "Beane",      "ref": "actor:beane",      "source_node_id": "bbbb0001-0000-0000-0000-000000000001" }
+    },
+    {
+      "id": "bbbb0001-0000-0000-0000-000000000041",
+      "type": "actor",
+      "blob": { "name": "DePodesta",  "ref": "actor:depodesta",  "source_node_id": "bbbb0001-0000-0000-0000-000000000002" }
+    },
+    {
+      "id": "bbbb0001-0000-0000-0000-000000000042",
+      "type": "actor",
+      "blob": { "name": "Hatteberg",  "ref": "actor:hatteberg",  "source_node_id": "bbbb0001-0000-0000-0000-000000000020" }
+    },
+    {
+      "id": "bbbb0001-0000-0000-0000-000000000043",
+      "type": "actor",
+      "blob": { "name": "Justice",    "ref": "actor:justice",    "source_node_id": "bbbb0001-0000-0000-0000-000000000021" }
+    },
+    {
+      "id": "bbbb0001-0000-0000-0000-000000000044",
+      "type": "actor",
+      "blob": { "name": "J.Giambi",   "ref": "actor:j-giambi",   "source_node_id": "bbbb0001-0000-0000-0000-000000000022" }
+    },
+    {
+      "id": "bbbb0001-0000-0000-0000-000000000045",
+      "type": "actor",
+      "blob": { "name": "Bradford",   "ref": "actor:bradford",   "source_node_id": "bbbb0001-0000-0000-0000-000000000023" }
+    },
+    {
+      "id": "bbbb0001-0000-0000-0000-000000000046",
+      "type": "actor",
+      "blob": { "name": "Hudson",     "ref": "actor:hudson",     "source_node_id": "bbbb0001-0000-0000-0000-000000000024" }
+    },
+    {
+      "id": "bbbb0001-0000-0000-0000-000000000047",
+      "type": "actor",
+      "blob": { "name": "Zito",       "ref": "actor:zito",       "source_node_id": "bbbb0001-0000-0000-0000-000000000025" }
+    },
+    {
+      "id": "bbbb0001-0000-0000-0000-000000000048",
+      "type": "actor",
+      "blob": { "name": "Mulder",     "ref": "actor:mulder",     "source_node_id": "bbbb0001-0000-0000-0000-000000000026" }
+    },
+    {
+      "id": "bbbb0001-0000-0000-0000-000000000060",
       "type": "policy",
       "blob": {
-        "name": "On-Base Percentage Policy",
+        "name": "OBP Selection Policy",
         "ref": "policy:obp-selection:v1",
-        "principle": "Players selected based on OBP over traditional stats",
-        "engine": "analytics",
+        "principle": "Select players based on on-base percentage, not traditional scouting metrics",
+        "engine": "opa",
+        "source": "package contrato.policies.obp_selection_v1\n\nimport rego.v1\n\ndefault decision := {\"action\": \"deny\", \"reasons\": [\"MB-BELOW-THRESHOLD\"], \"obligations\": []}\n\ndecision := {\n    \"action\": \"allow\",\n    \"reasons\": [\"MB-OBP-QUALIFIES\"],\n    \"obligations\": [{\"name\": \"log\", \"params\": {\"metric\": \"obp\"}}]\n} if {\n    input.action.context.obp >= 0.360\n    input.action.context.salary_musd <= 2.0\n}\n\ndecision := {\n    \"action\": \"require_approval\",\n    \"reasons\": [\"MB-BORDERLINE\"],\n    \"obligations\": [{\"name\": \"escalate_to_human\", \"params\": {\"escalate_to\": \"gm\"}}]\n} if {\n    input.action.context.obp >= 0.330\n    input.action.context.obp < 0.360\n    input.action.context.salary_musd <= 2.0\n}\n",
         "opa": {
-          "package": "contrato.policies.policy_obp_selection_v1",
+          "package": "contrato.policies.obp_selection_v1",
           "rule": "decision",
-          "input_schema": {
-            "tenant_id": "uuid",
-            "actor": {
-              "id": "uuid",
-              "type": "string",
-              "roles": [
-                "string"
-              ]
-            },
-            "subject": {
-              "id": "uuid",
-              "type": "string"
-            },
-            "action": {
-              "requested": "string",
-              "context": {
-                "type": "object"
-              }
-            },
-            "resource": {
-              "id": "uuid",
-              "type": "string",
-              "attrs": {
-                "type": "object"
-              }
-            },
-            "time": "rfc3339",
-            "parameters_snapshot": {
-              "type": "object"
-            }
-          },
-          "output_schema": {
-            "action": "string",
-            "obligations": [
-              {
-                "name": "string",
-                "params": {
-                  "type": "object"
-                }
-              }
-            ],
-            "reasons": [
-              "string"
-            ]
-          },
           "decision_examples": [
             {
-              "input": {
-                "action": {
-                  "requested": "sign_player",
-                  "context": {
-                    "obp": 0.41,
-                    "salary_musd": 1.2
-                  }
-                }
-              },
-              "output": {
-                "action": "allow",
-                "obligations": [
-                  {
-                    "name": "log",
-                    "params": {
-                      "metric": "obp"
-                    }
-                  }
-                ],
-                "reasons": [
-                  "MB-OBP"
-                ]
-              }
+              "input":  { "action": { "requested": "sign_player", "context": { "obp": 0.389, "salary_musd": 0.95 } } },
+              "output": { "action": "allow", "reasons": ["MB-OBP-QUALIFIES"], "obligations": [{ "name": "log", "params": { "metric": "obp" } }] }
+            },
+            {
+              "input":  { "action": { "requested": "sign_player", "context": { "obp": 0.290, "salary_musd": 8.0 } } },
+              "output": { "action": "deny",  "reasons": ["MB-BELOW-THRESHOLD"], "obligations": [] }
             }
           ]
         }
       }
     },
     {
-      "id": "efd83e63-6c09-4a1a-8ed8-663d9688b266",
-      "type": "actor",
+      "id": "bbbb0001-0000-0000-0000-000000000061",
+      "type": "policy",
       "blob": {
-        "name": "Actor",
-        "ref": "actor:default",
-        "source_node_id": "426ad2b9-51e1-474b-a9da-38df2daa26f9"
+        "name": "Payroll Efficiency Policy",
+        "ref": "policy:payroll-efficiency:v1",
+        "principle": "Maximise wins above replacement per dollar of payroll",
+        "engine": "opa",
+        "source": "package contrato.policies.payroll_efficiency_v1\n\nimport rego.v1\n\ndefault decision := {\"action\": \"deny\", \"reasons\": [\"MB-OVER-BUDGET\"], \"obligations\": []}\n\ndecision := {\n    \"action\": \"allow\",\n    \"reasons\": [\"MB-EFFICIENT\"],\n    \"obligations\": [{\"name\": \"log\", \"params\": {\"metric\": \"war_per_dollar\"}}]\n} if {\n    input.action.context.war_per_dollar >= 2.0\n}\n\ndecision := {\n    \"action\": \"require_approval\",\n    \"reasons\": [\"MB-REVIEW\"],\n    \"obligations\": [{\"name\": \"escalate_to_human\", \"params\": {\"escalate_to\": \"owner\"}}]\n} if {\n    input.action.context.war_per_dollar >= 1.0\n    input.action.context.war_per_dollar < 2.0\n}\n",
+        "opa": {
+          "package": "contrato.policies.payroll_efficiency_v1",
+          "rule": "decision"
+        }
       }
     },
     {
-      "id": "61c4de07-a541-4790-96ff-a1e2f910df84",
+      "id": "bbbb0001-0000-0000-0000-000000000070",
       "type": "capability",
-      "blob": {
-        "name": "Team Building",
-        "ref": "cap:team_building",
-        "job": "Select players under analytics-driven recruitment policy",
-        "version": "v1"
-      }
+      "blob": { "name": "High-OBP Lineup Slot",    "ref": "cap:high-obp-lineup",    "job": "Fill a batting position with a player meeting the OBP threshold" }
     },
     {
-      "id": "45f80e64-26f9-474e-a494-4405fcaeaf05",
-      "type": "player",
-      "blob": {
-        "name": "Player 01",
-        "ref": "player:01"
-      }
+      "id": "bbbb0001-0000-0000-0000-000000000071",
+      "type": "capability",
+      "blob": { "name": "Starting Rotation Depth",  "ref": "cap:starting-rotation",  "job": "Field a three-ace starting rotation under payroll constraints" }
     },
     {
-      "id": "1c9f8eb6-9107-489e-bbca-3abf8fda7658",
-      "type": "player",
-      "blob": {
-        "name": "Player 02",
-        "ref": "player:02"
-      }
+      "id": "bbbb0001-0000-0000-0000-000000000072",
+      "type": "capability",
+      "blob": { "name": "Closer Coverage",          "ref": "cap:closer-coverage",    "job": "Close out games in the 9th inning — vacant after Isringhausen departure" }
     },
     {
-      "id": "74cfd5e0-e672-4932-ab95-6ee9f78f997f",
-      "type": "player",
-      "blob": {
-        "name": "Player 03",
-        "ref": "player:03"
-      }
+      "id": "bbbb0001-0000-0000-0000-000000000073",
+      "type": "capability",
+      "blob": { "name": "Ground Ball Bullpen",      "ref": "cap:ground-ball-bullpen","job": "Suppress offensive production through ground ball rate in relief" }
     },
     {
-      "id": "7629f37e-ed60-4fff-a259-c81634896452",
-      "type": "player",
-      "blob": {
-        "name": "Player 04",
-        "ref": "player:04"
-      }
+      "id": "bbbb0001-0000-0000-0000-000000000074",
+      "type": "capability",
+      "blob": { "name": "Team Construction",        "ref": "cap:team-construction",  "job": "Assemble a competitive roster within budget via analytics" }
     },
     {
-      "id": "58186adf-3183-4e22-9f0d-6bda137ef88e",
-      "type": "player",
-      "blob": {
-        "name": "Player 05",
-        "ref": "player:05"
-      }
-    },
-    {
-      "id": "19a0b6f2-cb69-42db-95ce-17051e057f4d",
-      "type": "player",
-      "blob": {
-        "name": "Player 06",
-        "ref": "player:06"
-      }
-    },
-    {
-      "id": "b9fd412b-f7bb-408c-9c3e-f3c485d51013",
-      "type": "player",
-      "blob": {
-        "name": "Player 07",
-        "ref": "player:07"
-      }
-    },
-    {
-      "id": "38f8e5ba-d00b-45a1-8151-36359fa2e4f2",
-      "type": "player",
-      "blob": {
-        "name": "Player 08",
-        "ref": "player:08"
-      }
-    },
-    {
-      "id": "acbb7eaa-5902-4cf5-89d0-0c521ad1d6c0",
-      "type": "player",
-      "blob": {
-        "name": "Player 09",
-        "ref": "player:09"
-      }
-    },
-    {
-      "id": "a9f931cb-7e21-4db7-8697-7e7a7ec4667c",
-      "type": "player",
-      "blob": {
-        "name": "Player 10",
-        "ref": "player:10"
-      }
-    },
-    {
-      "id": "f85c8658-1be1-4c85-b7d6-e5ab7e8576bd",
-      "type": "player",
-      "blob": {
-        "name": "Player 11",
-        "ref": "player:11"
-      }
-    },
-    {
-      "id": "c40dd275-8468-4f00-8e66-14e982527a6f",
-      "type": "player",
-      "blob": {
-        "name": "Player 12",
-        "ref": "player:12"
-      }
-    },
-    {
-      "id": "5045fa04-193f-4da4-98a3-0c5ad358f8f6",
-      "type": "player",
-      "blob": {
-        "name": "Player 13",
-        "ref": "player:13"
-      }
-    },
-    {
-      "id": "cc979002-654e-431d-851b-ac14eaa7d52b",
-      "type": "player",
-      "blob": {
-        "name": "Player 14",
-        "ref": "player:14"
-      }
-    },
-    {
-      "id": "743ceea9-cf5c-436c-bf5a-66f7b8fafbcf",
-      "type": "player",
-      "blob": {
-        "name": "Player 15",
-        "ref": "player:15"
-      }
-    },
-    {
-      "id": "4f4169cc-cbe8-4317-b9fa-f475479cdbd4",
-      "type": "player",
-      "blob": {
-        "name": "Player 16",
-        "ref": "player:16"
-      }
-    },
-    {
-      "id": "59f3fcda-b5ff-499f-9e8c-077d0524b090",
-      "type": "player",
-      "blob": {
-        "name": "Player 17",
-        "ref": "player:17"
-      }
-    },
-    {
-      "id": "1d52815f-84fc-46ad-a33b-edb09b7ee06d",
-      "type": "player",
-      "blob": {
-        "name": "Player 18",
-        "ref": "player:18"
-      }
-    },
-    {
-      "id": "6c87badd-c9a2-45a9-96fc-fbe0b4bc1569",
-      "type": "player",
-      "blob": {
-        "name": "Player 19",
-        "ref": "player:19"
-      }
-    },
-    {
-      "id": "1c174fed-114b-403c-aa37-173412839eee",
-      "type": "player",
-      "blob": {
-        "name": "Player 20",
-        "ref": "player:20"
-      }
-    },
-    {
-      "id": "b6b2a44b-787a-4ede-acf2-6f7f56f3115d",
-      "type": "player",
-      "blob": {
-        "name": "Player 21",
-        "ref": "player:21"
-      }
-    },
-    {
-      "id": "3f21a071-a630-484d-a163-f23d0f25bc18",
-      "type": "player",
-      "blob": {
-        "name": "Player 22",
-        "ref": "player:22"
-      }
-    },
-    {
-      "id": "a7f4bebe-ac9f-4483-9ff8-1bb3d7ac67da",
-      "type": "player",
-      "blob": {
-        "name": "Player 23",
-        "ref": "player:23"
-      }
-    },
-    {
-      "id": "617d3595-2203-468d-b162-fed81151514e",
-      "type": "player",
-      "blob": {
-        "name": "Player 24",
-        "ref": "player:24"
-      }
-    },
-    {
-      "id": "5172fe02-4861-44c2-8511-b861c8ca9ffc",
-      "type": "player",
-      "blob": {
-        "name": "Player 25",
-        "ref": "player:25"
-      }
-    },
-    {
-      "id": "e4bc0b41-c7ea-47c6-a225-04292c8acef3",
-      "type": "player",
-      "blob": {
-        "name": "Player 26",
-        "ref": "player:26"
-      }
-    },
-    {
-      "id": "e03c3358-0fcb-478a-8592-105b8f33fc63",
-      "type": "player",
-      "blob": {
-        "name": "Player 27",
-        "ref": "player:27"
-      }
-    },
-    {
-      "id": "2cdfd2e3-85f6-45be-af85-42aad48f3520",
-      "type": "player",
-      "blob": {
-        "name": "Player 28",
-        "ref": "player:28"
-      }
-    },
-    {
-      "id": "2495dd68-d4b4-4afd-9e13-2964007fad1a",
-      "type": "player",
-      "blob": {
-        "name": "Player 29",
-        "ref": "player:29"
-      }
-    },
-    {
-      "id": "a07722a1-c0ff-484b-9907-2fa2ed0a467c",
-      "type": "player",
-      "blob": {
-        "name": "Player 30",
-        "ref": "player:30"
-      }
-    },
-    {
-      "id": "4e653801-2f5b-4770-8d7a-16d4ed919c87",
-      "type": "player",
-      "blob": {
-        "name": "Player 31",
-        "ref": "player:31"
-      }
-    },
-    {
-      "id": "e1baeb34-a10b-4879-a587-45e8b9bd1be4",
-      "type": "player",
-      "blob": {
-        "name": "Player 32",
-        "ref": "player:32"
-      }
-    },
-    {
-      "id": "ba2647e0-1b41-432a-ac8a-124f136239d5",
-      "type": "player",
-      "blob": {
-        "name": "Player 33",
-        "ref": "player:33"
-      }
-    },
-    {
-      "id": "1ff8a5cb-a82b-467f-bb6d-589285e5c09d",
-      "type": "player",
-      "blob": {
-        "name": "Player 34",
-        "ref": "player:34"
-      }
-    },
-    {
-      "id": "e6fc8eda-023a-4a4f-a8c3-2c3e8384377e",
-      "type": "player",
-      "blob": {
-        "name": "Player 35",
-        "ref": "player:35"
-      }
-    },
-    {
-      "id": "8f0f2dbe-2931-4c18-a1f0-56c10537764b",
-      "type": "player",
-      "blob": {
-        "name": "Player 36",
-        "ref": "player:36"
-      }
-    },
-    {
-      "id": "4541d5aa-c655-4860-ba7c-b30793aaa6a4",
-      "type": "player",
-      "blob": {
-        "name": "Player 37",
-        "ref": "player:37"
-      }
-    },
-    {
-      "id": "2e08d562-ab2b-4b12-b90f-fd1a150eba1a",
-      "type": "player",
-      "blob": {
-        "name": "Player 38",
-        "ref": "player:38"
-      }
-    },
-    {
-      "id": "79479f06-0ae8-409c-a41f-479397071831",
-      "type": "player",
-      "blob": {
-        "name": "Player 39",
-        "ref": "player:39"
-      }
-    },
-    {
-      "id": "8621bdb1-a3cd-44af-a991-7680ce6d5aee",
-      "type": "player",
-      "blob": {
-        "name": "Player 40",
-        "ref": "player:40"
-      }
-    },
-    {
-      "id": "2c588648-f2a8-421a-9072-8e87ca5d44f2",
-      "type": "player",
-      "blob": {
-        "name": "Player 41",
-        "ref": "player:41"
-      }
-    },
-    {
-      "id": "7040d2a7-7464-4f99-8a46-b95cc6ad30cd",
-      "type": "player",
-      "blob": {
-        "name": "Player 42",
-        "ref": "player:42"
-      }
-    },
-    {
-      "id": "7dfb8768-159e-4390-b3f6-1284ab6ef735",
-      "type": "player",
-      "blob": {
-        "name": "Player 43",
-        "ref": "player:43"
-      }
-    },
-    {
-      "id": "f703af40-2e75-4ebc-adf2-b513546b6010",
-      "type": "player",
-      "blob": {
-        "name": "Player 44",
-        "ref": "player:44"
-      }
-    },
-    {
-      "id": "9ca3d0b7-941b-4c9b-8c17-59de99c9bdb2",
-      "type": "player",
-      "blob": {
-        "name": "Player 45",
-        "ref": "player:45"
-      }
-    },
-    {
-      "id": "d15da2be-07cd-4d5b-86c2-f37266b75e4d",
-      "type": "player",
-      "blob": {
-        "name": "Player 46",
-        "ref": "player:46"
-      }
-    },
-    {
-      "id": "852f4323-80a5-497b-9c78-25f6c00fa1d2",
-      "type": "player",
-      "blob": {
-        "name": "Player 47",
-        "ref": "player:47"
-      }
-    },
-    {
-      "id": "c8c410da-90a3-46a8-859f-13fb729b18d3",
-      "type": "player",
-      "blob": {
-        "name": "Player 48",
-        "ref": "player:48"
-      }
-    },
-    {
-      "id": "3723b8e5-6947-4084-be21-f80540330d23",
-      "type": "player",
-      "blob": {
-        "name": "Player 49",
-        "ref": "player:49"
-      }
-    },
-    {
-      "id": "32b6c235-d7d0-4bf6-b789-d1592c4c5ed1",
-      "type": "player",
-      "blob": {
-        "name": "Player 50",
-        "ref": "player:50"
-      }
+      "id": "bbbb0001-0000-0000-0000-000000000075",
+      "type": "capability",
+      "blob": { "name": "Statistical Modelling",    "ref": "cap:stats-modelling",    "job": "Build sabermetric models to identify undervalued players" }
     }
   ],
   "edges": [
-    {
-      "from_id": "426ad2b9-51e1-474b-a9da-38df2daa26f9",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "owns",
-      "blob": {
-        "role": "general_manager"
-      }
-    },
-    {
-      "from_id": "da3b25e2-d8ab-4afb-8824-e0fc780be956",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "owns",
-      "blob": {
-        "role": "analytics"
-      }
-    },
-    {
-      "from_id": "a0f420e3-f6a9-4ac6-9c7b-2d2125cd646f",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "applies_to",
-      "blob": {
-        "scope": "recruitment"
-      }
-    },
-    {
-      "from_id": "efd83e63-6c09-4a1a-8ed8-663d9688b266",
-      "to_id": "61c4de07-a541-4790-96ff-a1e2f910df84",
-      "type": "provides",
-      "blob": {
-        "mode": "human_or_system"
-      }
-    },
-    {
-      "from_id": "61c4de07-a541-4790-96ff-a1e2f910df84",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "requires",
-      "blob": {
-        "role": "target"
-      }
-    },
-    {
-      "from_id": "a0f420e3-f6a9-4ac6-9c7b-2d2125cd646f",
-      "to_id": "61c4de07-a541-4790-96ff-a1e2f910df84",
-      "type": "governs",
-      "blob": {
-        "scope": "capability"
-      }
-    },
-    {
-      "from_id": "45f80e64-26f9-474e-a494-4405fcaeaf05",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 1
-      }
-    },
-    {
-      "from_id": "1c9f8eb6-9107-489e-bbca-3abf8fda7658",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 2
-      }
-    },
-    {
-      "from_id": "74cfd5e0-e672-4932-ab95-6ee9f78f997f",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 3
-      }
-    },
-    {
-      "from_id": "7629f37e-ed60-4fff-a259-c81634896452",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 4
-      }
-    },
-    {
-      "from_id": "58186adf-3183-4e22-9f0d-6bda137ef88e",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 5
-      }
-    },
-    {
-      "from_id": "19a0b6f2-cb69-42db-95ce-17051e057f4d",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 6
-      }
-    },
-    {
-      "from_id": "b9fd412b-f7bb-408c-9c3e-f3c485d51013",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 7
-      }
-    },
-    {
-      "from_id": "38f8e5ba-d00b-45a1-8151-36359fa2e4f2",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 8
-      }
-    },
-    {
-      "from_id": "acbb7eaa-5902-4cf5-89d0-0c521ad1d6c0",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 9
-      }
-    },
-    {
-      "from_id": "a9f931cb-7e21-4db7-8697-7e7a7ec4667c",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 10
-      }
-    },
-    {
-      "from_id": "f85c8658-1be1-4c85-b7d6-e5ab7e8576bd",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 11
-      }
-    },
-    {
-      "from_id": "c40dd275-8468-4f00-8e66-14e982527a6f",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 12
-      }
-    },
-    {
-      "from_id": "5045fa04-193f-4da4-98a3-0c5ad358f8f6",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 13
-      }
-    },
-    {
-      "from_id": "cc979002-654e-431d-851b-ac14eaa7d52b",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 14
-      }
-    },
-    {
-      "from_id": "743ceea9-cf5c-436c-bf5a-66f7b8fafbcf",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 15
-      }
-    },
-    {
-      "from_id": "4f4169cc-cbe8-4317-b9fa-f475479cdbd4",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 16
-      }
-    },
-    {
-      "from_id": "59f3fcda-b5ff-499f-9e8c-077d0524b090",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 17
-      }
-    },
-    {
-      "from_id": "1d52815f-84fc-46ad-a33b-edb09b7ee06d",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 18
-      }
-    },
-    {
-      "from_id": "6c87badd-c9a2-45a9-96fc-fbe0b4bc1569",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 19
-      }
-    },
-    {
-      "from_id": "1c174fed-114b-403c-aa37-173412839eee",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 20
-      }
-    },
-    {
-      "from_id": "b6b2a44b-787a-4ede-acf2-6f7f56f3115d",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 21
-      }
-    },
-    {
-      "from_id": "3f21a071-a630-484d-a163-f23d0f25bc18",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 22
-      }
-    },
-    {
-      "from_id": "a7f4bebe-ac9f-4483-9ff8-1bb3d7ac67da",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 23
-      }
-    },
-    {
-      "from_id": "617d3595-2203-468d-b162-fed81151514e",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 24
-      }
-    },
-    {
-      "from_id": "5172fe02-4861-44c2-8511-b861c8ca9ffc",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 25
-      }
-    },
-    {
-      "from_id": "e4bc0b41-c7ea-47c6-a225-04292c8acef3",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 26
-      }
-    },
-    {
-      "from_id": "e03c3358-0fcb-478a-8592-105b8f33fc63",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 27
-      }
-    },
-    {
-      "from_id": "2cdfd2e3-85f6-45be-af85-42aad48f3520",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 28
-      }
-    },
-    {
-      "from_id": "2495dd68-d4b4-4afd-9e13-2964007fad1a",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 29
-      }
-    },
-    {
-      "from_id": "a07722a1-c0ff-484b-9907-2fa2ed0a467c",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 30
-      }
-    },
-    {
-      "from_id": "4e653801-2f5b-4770-8d7a-16d4ed919c87",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 31
-      }
-    },
-    {
-      "from_id": "e1baeb34-a10b-4879-a587-45e8b9bd1be4",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 32
-      }
-    },
-    {
-      "from_id": "ba2647e0-1b41-432a-ac8a-124f136239d5",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 33
-      }
-    },
-    {
-      "from_id": "1ff8a5cb-a82b-467f-bb6d-589285e5c09d",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 34
-      }
-    },
-    {
-      "from_id": "e6fc8eda-023a-4a4f-a8c3-2c3e8384377e",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 35
-      }
-    },
-    {
-      "from_id": "8f0f2dbe-2931-4c18-a1f0-56c10537764b",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 36
-      }
-    },
-    {
-      "from_id": "4541d5aa-c655-4860-ba7c-b30793aaa6a4",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 37
-      }
-    },
-    {
-      "from_id": "2e08d562-ab2b-4b12-b90f-fd1a150eba1a",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 38
-      }
-    },
-    {
-      "from_id": "79479f06-0ae8-409c-a41f-479397071831",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 39
-      }
-    },
-    {
-      "from_id": "8621bdb1-a3cd-44af-a991-7680ce6d5aee",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 40
-      }
-    },
-    {
-      "from_id": "2c588648-f2a8-421a-9072-8e87ca5d44f2",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 41
-      }
-    },
-    {
-      "from_id": "7040d2a7-7464-4f99-8a46-b95cc6ad30cd",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 42
-      }
-    },
-    {
-      "from_id": "7dfb8768-159e-4390-b3f6-1284ab6ef735",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 43
-      }
-    },
-    {
-      "from_id": "f703af40-2e75-4ebc-adf2-b513546b6010",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 44
-      }
-    },
-    {
-      "from_id": "9ca3d0b7-941b-4c9b-8c17-59de99c9bdb2",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 45
-      }
-    },
-    {
-      "from_id": "d15da2be-07cd-4d5b-86c2-f37266b75e4d",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 46
-      }
-    },
-    {
-      "from_id": "852f4323-80a5-497b-9c78-25f6c00fa1d2",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 47
-      }
-    },
-    {
-      "from_id": "c8c410da-90a3-46a8-859f-13fb729b18d3",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 48
-      }
-    },
-    {
-      "from_id": "3723b8e5-6947-4084-be21-f80540330d23",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 49
-      }
-    },
-    {
-      "from_id": "32b6c235-d7d0-4bf6-b789-d1592c4c5ed1",
-      "to_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "type": "candidate_for",
-      "blob": {
-        "source": "scouting",
-        "rank": 50
-      }
-    }
+    { "from_id": "bbbb0001-0000-0000-0000-000000000010", "to_id": "bbbb0001-0000-0000-0000-000000000074", "type": "owns",           "blob": { "owns": "franchise_capability" } },
+
+    { "from_id": "bbbb0001-0000-0000-0000-000000000060", "to_id": "bbbb0001-0000-0000-0000-000000000070", "type": "governs",        "blob": {} },
+    { "from_id": "bbbb0001-0000-0000-0000-000000000061", "to_id": "bbbb0001-0000-0000-0000-000000000074", "type": "governs",        "blob": {} },
+    { "from_id": "bbbb0001-0000-0000-0000-000000000061", "to_id": "bbbb0001-0000-0000-0000-000000000075", "type": "governs",        "blob": {} },
+
+    { "from_id": "bbbb0001-0000-0000-0000-000000000040", "to_id": "bbbb0001-0000-0000-0000-000000000074", "type": "provides",       "blob": { "role": "gm" } },
+    { "from_id": "bbbb0001-0000-0000-0000-000000000040", "to_id": "bbbb0001-0000-0000-0000-000000000041", "type": "can_delegate_to","blob": { "scope": "analysis" } },
+    { "from_id": "bbbb0001-0000-0000-0000-000000000041", "to_id": "bbbb0001-0000-0000-0000-000000000075", "type": "provides",       "blob": { "role": "analyst" } },
+
+    { "from_id": "bbbb0001-0000-0000-0000-000000000042", "to_id": "bbbb0001-0000-0000-0000-000000000070", "type": "provides",       "blob": { "obp": 0.389 } },
+    { "from_id": "bbbb0001-0000-0000-0000-000000000043", "to_id": "bbbb0001-0000-0000-0000-000000000070", "type": "provides",       "blob": { "obp": 0.376 } },
+    { "from_id": "bbbb0001-0000-0000-0000-000000000044", "to_id": "bbbb0001-0000-0000-0000-000000000070", "type": "provides",       "blob": { "obp": 0.383 } },
+
+    { "from_id": "bbbb0001-0000-0000-0000-000000000045", "to_id": "bbbb0001-0000-0000-0000-000000000073", "type": "provides",       "blob": { "whip": 0.97, "style": "submarine" } },
+
+    { "from_id": "bbbb0001-0000-0000-0000-000000000046", "to_id": "bbbb0001-0000-0000-0000-000000000071", "type": "provides",       "blob": { "slot": "ace_2" } },
+    { "from_id": "bbbb0001-0000-0000-0000-000000000047", "to_id": "bbbb0001-0000-0000-0000-000000000071", "type": "provides",       "blob": { "slot": "ace_1" } },
+    { "from_id": "bbbb0001-0000-0000-0000-000000000048", "to_id": "bbbb0001-0000-0000-0000-000000000071", "type": "provides",       "blob": { "slot": "ace_3" } },
+
+    { "from_id": "bbbb0001-0000-0000-0000-000000000074", "to_id": "bbbb0001-0000-0000-0000-000000000070", "type": "requires",       "blob": { "min_slots": 3 } },
+    { "from_id": "bbbb0001-0000-0000-0000-000000000074", "to_id": "bbbb0001-0000-0000-0000-000000000071", "type": "requires",       "blob": { "min_starters": 3 } },
+    { "from_id": "bbbb0001-0000-0000-0000-000000000074", "to_id": "bbbb0001-0000-0000-0000-000000000072", "type": "requires",       "blob": { "critical": true } },
+    { "from_id": "bbbb0001-0000-0000-0000-000000000074", "to_id": "bbbb0001-0000-0000-0000-000000000075", "type": "requires",       "blob": {} },
+    { "from_id": "bbbb0001-0000-0000-0000-000000000073", "to_id": "bbbb0001-0000-0000-0000-000000000072", "type": "requires",       "blob": { "handoff": "8th_to_9th" } },
+
+    { "from_id": "bbbb0001-0000-0000-0000-000000000020", "to_id": "bbbb0001-0000-0000-0000-000000000072", "type": "candidate_for",  "blob": { "note": "Beane considered converting Hatteberg to closer backup" } }
   ],
   "properties": [
     {
-      "owner_type": "node",
-      "owner_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "key": "budget_constraint",
+      "owner_type": "node", "owner_id": "bbbb0001-0000-0000-0000-000000000072", "key": "availability",
+      "value": false,
+      "_comment": "gap: Closer Coverage is vacant — Isringhausen departed for St. Louis Cardinals"
+    },
+    {
+      "owner_type": "node", "owner_id": "bbbb0001-0000-0000-0000-000000000073", "key": "availability",
+      "value": true
+    },
+    {
+      "owner_type": "node", "owner_id": "bbbb0001-0000-0000-0000-000000000070", "key": "availability",
+      "value": true
+    },
+    {
+      "owner_type": "node", "owner_id": "bbbb0001-0000-0000-0000-000000000071", "key": "availability",
+      "value": true
+    },
+    {
+      "owner_type": "node", "owner_id": "bbbb0001-0000-0000-0000-000000000074", "key": "availability",
+      "value": true
+    },
+    {
+      "owner_type": "node", "owner_id": "bbbb0001-0000-0000-0000-000000000075", "key": "availability",
+      "value": true
+    },
+    {
+      "owner_type": "node", "owner_id": "bbbb0001-0000-0000-0000-000000000010", "key": "wins",
+      "value": 103
+    },
+    {
+      "owner_type": "node", "owner_id": "bbbb0001-0000-0000-0000-000000000010", "key": "payroll_rank",
+      "value": 28
+    },
+    {
+      "owner_type": "node", "owner_id": "bbbb0001-0000-0000-0000-000000000010", "key": "total_payroll_musd",
+      "value": 41.9
+    },
+    {
+      "owner_type": "node", "owner_id": "bbbb0001-0000-0000-0000-000000000060", "key": "reason_codes",
       "value": {
-        "max_payroll_musd": 40
+        "MB-OBP-QUALIFIES":   "Player on-base percentage meets or exceeds 0.360 threshold",
+        "MB-BORDERLINE":      "OBP between 0.330 and 0.360 — requires GM approval",
+        "MB-BELOW-THRESHOLD": "Player OBP below minimum acceptable threshold"
       }
     },
     {
-      "owner_type": "node",
-      "owner_id": "a0f420e3-f6a9-4ac6-9c7b-2d2125cd646f",
-      "key": "metrics",
+      "owner_type": "node", "owner_id": "bbbb0001-0000-0000-0000-000000000060", "key": "contract_actions",
+      "value": ["allow", "deny", "require_approval"]
+    },
+    {
+      "owner_type": "node", "owner_id": "bbbb0001-0000-0000-0000-000000000060", "key": "obligations_supported",
+      "value": ["log", "notify", "escalate_to_human"]
+    },
+    {
+      "owner_type": "node", "owner_id": "bbbb0001-0000-0000-0000-000000000060", "key": "threshold.obp_min",
+      "value": 0.36
+    },
+    {
+      "owner_type": "node", "owner_id": "bbbb0001-0000-0000-0000-000000000060", "key": "threshold.salary_max_musd",
+      "value": 2.0
+    },
+    {
+      "owner_type": "node", "owner_id": "bbbb0001-0000-0000-0000-000000000061", "key": "reason_codes",
       "value": {
-        "primary": "obp",
-        "secondary": [
-          "slugging",
-          "walk_rate"
-        ]
+        "MB-EFFICIENT":  "WAR per dollar meets efficiency threshold",
+        "MB-REVIEW":     "Marginal efficiency — owner review required",
+        "MB-OVER-BUDGET": "Acquisition exceeds payroll budget allocation"
       }
     },
     {
-      "owner_type": "node",
-      "owner_id": "a0f420e3-f6a9-4ac6-9c7b-2d2125cd646f",
-      "key": "reason_codes",
-      "value": {
-        "MB-OBP": "Selection prioritises OBP",
-        "MB-BUDGET": "Budget constraint applies",
-        "MB-ESC": "Escalate to GM"
-      }
+      "owner_type": "node", "owner_id": "bbbb0001-0000-0000-0000-000000000073", "key": "threshold.whip_max",
+      "value": 1.20
     },
     {
-      "owner_type": "node",
-      "owner_id": "a0f420e3-f6a9-4ac6-9c7b-2d2125cd646f",
-      "key": "contract_actions",
-      "value": [
-        "allow",
-        "deny",
-        "defer",
-        "delegate",
-        "require_approval",
-        "escalate"
-      ]
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "a0f420e3-f6a9-4ac6-9c7b-2d2125cd646f",
-      "key": "obligations_supported",
-      "value": [
-        "log",
-        "notify",
-        "create_approval_task",
-        "escalate_to_human"
-      ]
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "key": "wins",
-      "value_int": 103
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "73506d38-2587-41ef-be06-7b1be8017d1f",
-      "key": "payroll_rank",
-      "value_int": 30
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "61c4de07-a541-4790-96ff-a1e2f910df84",
-      "key": "threshold.obp_min",
-      "value_float": 0.35
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "61c4de07-a541-4790-96ff-a1e2f910df84",
-      "key": "constraint.max_payroll_musd",
-      "value_int": 40
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "61c4de07-a541-4790-96ff-a1e2f910df84",
-      "key": "capability.reliability",
-      "value_float": 0.85
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "61c4de07-a541-4790-96ff-a1e2f910df84",
-      "key": "capability.latency_p95_ms",
-      "value_int": 250
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "45f80e64-26f9-474e-a494-4405fcaeaf05",
-      "key": "stat.obp",
-      "value_float": 0.289
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "45f80e64-26f9-474e-a494-4405fcaeaf05",
-      "key": "stat.slg",
-      "value_float": 0.528
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "45f80e64-26f9-474e-a494-4405fcaeaf05",
-      "key": "stat.walk_rate",
-      "value_float": 0.041
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "45f80e64-26f9-474e-a494-4405fcaeaf05",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.234
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "45f80e64-26f9-474e-a494-4405fcaeaf05",
-      "key": "player.age",
-      "value_int": 31
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "45f80e64-26f9-474e-a494-4405fcaeaf05",
-      "key": "salary.usd",
-      "value_int": 7139480
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "1c9f8eb6-9107-489e-bbca-3abf8fda7658",
-      "key": "stat.obp",
-      "value_float": 0.301
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "1c9f8eb6-9107-489e-bbca-3abf8fda7658",
-      "key": "stat.slg",
-      "value_float": 0.33
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "1c9f8eb6-9107-489e-bbca-3abf8fda7658",
-      "key": "stat.walk_rate",
-      "value_float": 0.093
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "1c9f8eb6-9107-489e-bbca-3abf8fda7658",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.16
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "1c9f8eb6-9107-489e-bbca-3abf8fda7658",
-      "key": "player.age",
-      "value_int": 37
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "1c9f8eb6-9107-489e-bbca-3abf8fda7658",
-      "key": "salary.usd",
-      "value_int": 5295648
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "74cfd5e0-e672-4932-ab95-6ee9f78f997f",
-      "key": "stat.obp",
-      "value_float": 0.284
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "74cfd5e0-e672-4932-ab95-6ee9f78f997f",
-      "key": "stat.slg",
-      "value_float": 0.378
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "74cfd5e0-e672-4932-ab95-6ee9f78f997f",
-      "key": "stat.walk_rate",
-      "value_float": 0.124
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "74cfd5e0-e672-4932-ab95-6ee9f78f997f",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.337
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "74cfd5e0-e672-4932-ab95-6ee9f78f997f",
-      "key": "player.age",
-      "value_int": 32
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "74cfd5e0-e672-4932-ab95-6ee9f78f997f",
-      "key": "salary.usd",
-      "value_int": 927715
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "7629f37e-ed60-4fff-a259-c81634896452",
-      "key": "stat.obp",
-      "value_float": 0.366
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "7629f37e-ed60-4fff-a259-c81634896452",
-      "key": "stat.slg",
-      "value_float": 0.347
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "7629f37e-ed60-4fff-a259-c81634896452",
-      "key": "stat.walk_rate",
-      "value_float": 0.093
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "7629f37e-ed60-4fff-a259-c81634896452",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.235
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "7629f37e-ed60-4fff-a259-c81634896452",
-      "key": "player.age",
-      "value_int": 29
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "7629f37e-ed60-4fff-a259-c81634896452",
-      "key": "salary.usd",
-      "value_int": 6876997
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "58186adf-3183-4e22-9f0d-6bda137ef88e",
-      "key": "stat.obp",
-      "value_float": 0.28
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "58186adf-3183-4e22-9f0d-6bda137ef88e",
-      "key": "stat.slg",
-      "value_float": 0.5
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "58186adf-3183-4e22-9f0d-6bda137ef88e",
-      "key": "stat.walk_rate",
-      "value_float": 0.058
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "58186adf-3183-4e22-9f0d-6bda137ef88e",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.124
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "58186adf-3183-4e22-9f0d-6bda137ef88e",
-      "key": "player.age",
-      "value_int": 22
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "58186adf-3183-4e22-9f0d-6bda137ef88e",
-      "key": "salary.usd",
-      "value_int": 6924890
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "19a0b6f2-cb69-42db-95ce-17051e057f4d",
-      "key": "stat.obp",
-      "value_float": 0.354
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "19a0b6f2-cb69-42db-95ce-17051e057f4d",
-      "key": "stat.slg",
-      "value_float": 0.486
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "19a0b6f2-cb69-42db-95ce-17051e057f4d",
-      "key": "stat.walk_rate",
-      "value_float": 0.147
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "19a0b6f2-cb69-42db-95ce-17051e057f4d",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.216
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "19a0b6f2-cb69-42db-95ce-17051e057f4d",
-      "key": "player.age",
-      "value_int": 34
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "19a0b6f2-cb69-42db-95ce-17051e057f4d",
-      "key": "salary.usd",
-      "value_int": 4562434
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "b9fd412b-f7bb-408c-9c3e-f3c485d51013",
-      "key": "stat.obp",
-      "value_float": 0.294
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "b9fd412b-f7bb-408c-9c3e-f3c485d51013",
-      "key": "stat.slg",
-      "value_float": 0.573
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "b9fd412b-f7bb-408c-9c3e-f3c485d51013",
-      "key": "stat.walk_rate",
-      "value_float": 0.042
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "b9fd412b-f7bb-408c-9c3e-f3c485d51013",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.175
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "b9fd412b-f7bb-408c-9c3e-f3c485d51013",
-      "key": "player.age",
-      "value_int": 35
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "b9fd412b-f7bb-408c-9c3e-f3c485d51013",
-      "key": "salary.usd",
-      "value_int": 10545351
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "38f8e5ba-d00b-45a1-8151-36359fa2e4f2",
-      "key": "stat.obp",
-      "value_float": 0.315
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "38f8e5ba-d00b-45a1-8151-36359fa2e4f2",
-      "key": "stat.slg",
-      "value_float": 0.643
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "38f8e5ba-d00b-45a1-8151-36359fa2e4f2",
-      "key": "stat.walk_rate",
-      "value_float": 0.048
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "38f8e5ba-d00b-45a1-8151-36359fa2e4f2",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.205
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "38f8e5ba-d00b-45a1-8151-36359fa2e4f2",
-      "key": "player.age",
-      "value_int": 30
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "38f8e5ba-d00b-45a1-8151-36359fa2e4f2",
-      "key": "salary.usd",
-      "value_int": 2120619
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "acbb7eaa-5902-4cf5-89d0-0c521ad1d6c0",
-      "key": "stat.obp",
-      "value_float": 0.267
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "acbb7eaa-5902-4cf5-89d0-0c521ad1d6c0",
-      "key": "stat.slg",
-      "value_float": 0.534
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "acbb7eaa-5902-4cf5-89d0-0c521ad1d6c0",
-      "key": "stat.walk_rate",
-      "value_float": 0.145
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "acbb7eaa-5902-4cf5-89d0-0c521ad1d6c0",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.243
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "acbb7eaa-5902-4cf5-89d0-0c521ad1d6c0",
-      "key": "player.age",
-      "value_int": 30
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "acbb7eaa-5902-4cf5-89d0-0c521ad1d6c0",
-      "key": "salary.usd",
-      "value_int": 4312425
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "a9f931cb-7e21-4db7-8697-7e7a7ec4667c",
-      "key": "stat.obp",
-      "value_float": 0.354
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "a9f931cb-7e21-4db7-8697-7e7a7ec4667c",
-      "key": "stat.slg",
-      "value_float": 0.579
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "a9f931cb-7e21-4db7-8697-7e7a7ec4667c",
-      "key": "stat.walk_rate",
-      "value_float": 0.04
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "a9f931cb-7e21-4db7-8697-7e7a7ec4667c",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.123
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "a9f931cb-7e21-4db7-8697-7e7a7ec4667c",
-      "key": "player.age",
-      "value_int": 28
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "a9f931cb-7e21-4db7-8697-7e7a7ec4667c",
-      "key": "salary.usd",
-      "value_int": 5873245
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "f85c8658-1be1-4c85-b7d6-e5ab7e8576bd",
-      "key": "stat.obp",
-      "value_float": 0.272
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "f85c8658-1be1-4c85-b7d6-e5ab7e8576bd",
-      "key": "stat.slg",
-      "value_float": 0.546
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "f85c8658-1be1-4c85-b7d6-e5ab7e8576bd",
-      "key": "stat.walk_rate",
-      "value_float": 0.127
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "f85c8658-1be1-4c85-b7d6-e5ab7e8576bd",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.348
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "f85c8658-1be1-4c85-b7d6-e5ab7e8576bd",
-      "key": "player.age",
-      "value_int": 34
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "f85c8658-1be1-4c85-b7d6-e5ab7e8576bd",
-      "key": "salary.usd",
-      "value_int": 3665537
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "c40dd275-8468-4f00-8e66-14e982527a6f",
-      "key": "stat.obp",
-      "value_float": 0.387
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "c40dd275-8468-4f00-8e66-14e982527a6f",
-      "key": "stat.slg",
-      "value_float": 0.308
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "c40dd275-8468-4f00-8e66-14e982527a6f",
-      "key": "stat.walk_rate",
-      "value_float": 0.099
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "c40dd275-8468-4f00-8e66-14e982527a6f",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.142
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "c40dd275-8468-4f00-8e66-14e982527a6f",
-      "key": "player.age",
-      "value_int": 23
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "c40dd275-8468-4f00-8e66-14e982527a6f",
-      "key": "salary.usd",
-      "value_int": 6101523
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "5045fa04-193f-4da4-98a3-0c5ad358f8f6",
-      "key": "stat.obp",
-      "value_float": 0.315
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "5045fa04-193f-4da4-98a3-0c5ad358f8f6",
-      "key": "stat.slg",
-      "value_float": 0.558
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "5045fa04-193f-4da4-98a3-0c5ad358f8f6",
-      "key": "stat.walk_rate",
-      "value_float": 0.09
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "5045fa04-193f-4da4-98a3-0c5ad358f8f6",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.329
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "5045fa04-193f-4da4-98a3-0c5ad358f8f6",
-      "key": "player.age",
-      "value_int": 35
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "5045fa04-193f-4da4-98a3-0c5ad358f8f6",
-      "key": "salary.usd",
-      "value_int": 1288772
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "cc979002-654e-431d-851b-ac14eaa7d52b",
-      "key": "stat.obp",
-      "value_float": 0.364
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "cc979002-654e-431d-851b-ac14eaa7d52b",
-      "key": "stat.slg",
-      "value_float": 0.609
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "cc979002-654e-431d-851b-ac14eaa7d52b",
-      "key": "stat.walk_rate",
-      "value_float": 0.153
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "cc979002-654e-431d-851b-ac14eaa7d52b",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.316
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "cc979002-654e-431d-851b-ac14eaa7d52b",
-      "key": "player.age",
-      "value_int": 28
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "cc979002-654e-431d-851b-ac14eaa7d52b",
-      "key": "salary.usd",
-      "value_int": 8579521
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "743ceea9-cf5c-436c-bf5a-66f7b8fafbcf",
-      "key": "stat.obp",
-      "value_float": 0.39
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "743ceea9-cf5c-436c-bf5a-66f7b8fafbcf",
-      "key": "stat.slg",
-      "value_float": 0.433
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "743ceea9-cf5c-436c-bf5a-66f7b8fafbcf",
-      "key": "stat.walk_rate",
-      "value_float": 0.065
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "743ceea9-cf5c-436c-bf5a-66f7b8fafbcf",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.121
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "743ceea9-cf5c-436c-bf5a-66f7b8fafbcf",
-      "key": "player.age",
-      "value_int": 24
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "743ceea9-cf5c-436c-bf5a-66f7b8fafbcf",
-      "key": "salary.usd",
-      "value_int": 3052297
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "4f4169cc-cbe8-4317-b9fa-f475479cdbd4",
-      "key": "stat.obp",
-      "value_float": 0.352
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "4f4169cc-cbe8-4317-b9fa-f475479cdbd4",
-      "key": "stat.slg",
-      "value_float": 0.506
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "4f4169cc-cbe8-4317-b9fa-f475479cdbd4",
-      "key": "stat.walk_rate",
-      "value_float": 0.069
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "4f4169cc-cbe8-4317-b9fa-f475479cdbd4",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.101
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "4f4169cc-cbe8-4317-b9fa-f475479cdbd4",
-      "key": "player.age",
-      "value_int": 33
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "4f4169cc-cbe8-4317-b9fa-f475479cdbd4",
-      "key": "salary.usd",
-      "value_int": 6577984
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "59f3fcda-b5ff-499f-9e8c-077d0524b090",
-      "key": "stat.obp",
-      "value_float": 0.321
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "59f3fcda-b5ff-499f-9e8c-077d0524b090",
-      "key": "stat.slg",
-      "value_float": 0.344
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "59f3fcda-b5ff-499f-9e8c-077d0524b090",
-      "key": "stat.walk_rate",
-      "value_float": 0.159
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "59f3fcda-b5ff-499f-9e8c-077d0524b090",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.338
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "59f3fcda-b5ff-499f-9e8c-077d0524b090",
-      "key": "player.age",
-      "value_int": 21
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "59f3fcda-b5ff-499f-9e8c-077d0524b090",
-      "key": "salary.usd",
-      "value_int": 5669899
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "1d52815f-84fc-46ad-a33b-edb09b7ee06d",
-      "key": "stat.obp",
-      "value_float": 0.441
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "1d52815f-84fc-46ad-a33b-edb09b7ee06d",
-      "key": "stat.slg",
-      "value_float": 0.538
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "1d52815f-84fc-46ad-a33b-edb09b7ee06d",
-      "key": "stat.walk_rate",
-      "value_float": 0.114
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "1d52815f-84fc-46ad-a33b-edb09b7ee06d",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.2
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "1d52815f-84fc-46ad-a33b-edb09b7ee06d",
-      "key": "player.age",
-      "value_int": 32
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "1d52815f-84fc-46ad-a33b-edb09b7ee06d",
-      "key": "salary.usd",
-      "value_int": 1556207
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "6c87badd-c9a2-45a9-96fc-fbe0b4bc1569",
-      "key": "stat.obp",
-      "value_float": 0.272
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "6c87badd-c9a2-45a9-96fc-fbe0b4bc1569",
-      "key": "stat.slg",
-      "value_float": 0.324
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "6c87badd-c9a2-45a9-96fc-fbe0b4bc1569",
-      "key": "stat.walk_rate",
-      "value_float": 0.061
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "6c87badd-c9a2-45a9-96fc-fbe0b4bc1569",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.141
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "6c87badd-c9a2-45a9-96fc-fbe0b4bc1569",
-      "key": "player.age",
-      "value_int": 30
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "6c87badd-c9a2-45a9-96fc-fbe0b4bc1569",
-      "key": "salary.usd",
-      "value_int": 7348472
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "1c174fed-114b-403c-aa37-173412839eee",
-      "key": "stat.obp",
-      "value_float": 0.368
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "1c174fed-114b-403c-aa37-173412839eee",
-      "key": "stat.slg",
-      "value_float": 0.488
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "1c174fed-114b-403c-aa37-173412839eee",
-      "key": "stat.walk_rate",
-      "value_float": 0.172
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "1c174fed-114b-403c-aa37-173412839eee",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.253
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "1c174fed-114b-403c-aa37-173412839eee",
-      "key": "player.age",
-      "value_int": 22
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "1c174fed-114b-403c-aa37-173412839eee",
-      "key": "salary.usd",
-      "value_int": 10535972
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "b6b2a44b-787a-4ede-acf2-6f7f56f3115d",
-      "key": "stat.obp",
-      "value_float": 0.288
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "b6b2a44b-787a-4ede-acf2-6f7f56f3115d",
-      "key": "stat.slg",
-      "value_float": 0.388
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "b6b2a44b-787a-4ede-acf2-6f7f56f3115d",
-      "key": "stat.walk_rate",
-      "value_float": 0.082
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "b6b2a44b-787a-4ede-acf2-6f7f56f3115d",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.191
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "b6b2a44b-787a-4ede-acf2-6f7f56f3115d",
-      "key": "player.age",
-      "value_int": 23
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "b6b2a44b-787a-4ede-acf2-6f7f56f3115d",
-      "key": "salary.usd",
-      "value_int": 1693868
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "3f21a071-a630-484d-a163-f23d0f25bc18",
-      "key": "stat.obp",
-      "value_float": 0.446
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "3f21a071-a630-484d-a163-f23d0f25bc18",
-      "key": "stat.slg",
-      "value_float": 0.468
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "3f21a071-a630-484d-a163-f23d0f25bc18",
-      "key": "stat.walk_rate",
-      "value_float": 0.077
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "3f21a071-a630-484d-a163-f23d0f25bc18",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.136
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "3f21a071-a630-484d-a163-f23d0f25bc18",
-      "key": "player.age",
-      "value_int": 30
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "3f21a071-a630-484d-a163-f23d0f25bc18",
-      "key": "salary.usd",
-      "value_int": 8975091
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "a7f4bebe-ac9f-4483-9ff8-1bb3d7ac67da",
-      "key": "stat.obp",
-      "value_float": 0.391
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "a7f4bebe-ac9f-4483-9ff8-1bb3d7ac67da",
-      "key": "stat.slg",
-      "value_float": 0.481
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "a7f4bebe-ac9f-4483-9ff8-1bb3d7ac67da",
-      "key": "stat.walk_rate",
-      "value_float": 0.061
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "a7f4bebe-ac9f-4483-9ff8-1bb3d7ac67da",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.338
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "a7f4bebe-ac9f-4483-9ff8-1bb3d7ac67da",
-      "key": "player.age",
-      "value_int": 31
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "a7f4bebe-ac9f-4483-9ff8-1bb3d7ac67da",
-      "key": "salary.usd",
-      "value_int": 2057919
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "617d3595-2203-468d-b162-fed81151514e",
-      "key": "stat.obp",
-      "value_float": 0.265
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "617d3595-2203-468d-b162-fed81151514e",
-      "key": "stat.slg",
-      "value_float": 0.485
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "617d3595-2203-468d-b162-fed81151514e",
-      "key": "stat.walk_rate",
-      "value_float": 0.177
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "617d3595-2203-468d-b162-fed81151514e",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.316
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "617d3595-2203-468d-b162-fed81151514e",
-      "key": "player.age",
-      "value_int": 28
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "617d3595-2203-468d-b162-fed81151514e",
-      "key": "salary.usd",
-      "value_int": 6389323
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "5172fe02-4861-44c2-8511-b861c8ca9ffc",
-      "key": "stat.obp",
-      "value_float": 0.328
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "5172fe02-4861-44c2-8511-b861c8ca9ffc",
-      "key": "stat.slg",
-      "value_float": 0.378
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "5172fe02-4861-44c2-8511-b861c8ca9ffc",
-      "key": "stat.walk_rate",
-      "value_float": 0.111
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "5172fe02-4861-44c2-8511-b861c8ca9ffc",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.226
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "5172fe02-4861-44c2-8511-b861c8ca9ffc",
-      "key": "player.age",
-      "value_int": 27
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "5172fe02-4861-44c2-8511-b861c8ca9ffc",
-      "key": "salary.usd",
-      "value_int": 7494108
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "e4bc0b41-c7ea-47c6-a225-04292c8acef3",
-      "key": "stat.obp",
-      "value_float": 0.404
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "e4bc0b41-c7ea-47c6-a225-04292c8acef3",
-      "key": "stat.slg",
-      "value_float": 0.368
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "e4bc0b41-c7ea-47c6-a225-04292c8acef3",
-      "key": "stat.walk_rate",
-      "value_float": 0.066
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "e4bc0b41-c7ea-47c6-a225-04292c8acef3",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.2
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "e4bc0b41-c7ea-47c6-a225-04292c8acef3",
-      "key": "player.age",
-      "value_int": 27
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "e4bc0b41-c7ea-47c6-a225-04292c8acef3",
-      "key": "salary.usd",
-      "value_int": 2679044
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "e03c3358-0fcb-478a-8592-105b8f33fc63",
-      "key": "stat.obp",
-      "value_float": 0.399
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "e03c3358-0fcb-478a-8592-105b8f33fc63",
-      "key": "stat.slg",
-      "value_float": 0.646
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "e03c3358-0fcb-478a-8592-105b8f33fc63",
-      "key": "stat.walk_rate",
-      "value_float": 0.149
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "e03c3358-0fcb-478a-8592-105b8f33fc63",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.218
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "e03c3358-0fcb-478a-8592-105b8f33fc63",
-      "key": "player.age",
-      "value_int": 26
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "e03c3358-0fcb-478a-8592-105b8f33fc63",
-      "key": "salary.usd",
-      "value_int": 8417880
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "2cdfd2e3-85f6-45be-af85-42aad48f3520",
-      "key": "stat.obp",
-      "value_float": 0.345
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "2cdfd2e3-85f6-45be-af85-42aad48f3520",
-      "key": "stat.slg",
-      "value_float": 0.628
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "2cdfd2e3-85f6-45be-af85-42aad48f3520",
-      "key": "stat.walk_rate",
-      "value_float": 0.178
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "2cdfd2e3-85f6-45be-af85-42aad48f3520",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.339
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "2cdfd2e3-85f6-45be-af85-42aad48f3520",
-      "key": "player.age",
-      "value_int": 31
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "2cdfd2e3-85f6-45be-af85-42aad48f3520",
-      "key": "salary.usd",
-      "value_int": 1288269
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "2495dd68-d4b4-4afd-9e13-2964007fad1a",
-      "key": "stat.obp",
-      "value_float": 0.349
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "2495dd68-d4b4-4afd-9e13-2964007fad1a",
-      "key": "stat.slg",
-      "value_float": 0.418
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "2495dd68-d4b4-4afd-9e13-2964007fad1a",
-      "key": "stat.walk_rate",
-      "value_float": 0.102
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "2495dd68-d4b4-4afd-9e13-2964007fad1a",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.346
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "2495dd68-d4b4-4afd-9e13-2964007fad1a",
-      "key": "player.age",
-      "value_int": 20
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "2495dd68-d4b4-4afd-9e13-2964007fad1a",
-      "key": "salary.usd",
-      "value_int": 5935865
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "a07722a1-c0ff-484b-9907-2fa2ed0a467c",
-      "key": "stat.obp",
-      "value_float": 0.412
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "a07722a1-c0ff-484b-9907-2fa2ed0a467c",
-      "key": "stat.slg",
-      "value_float": 0.33
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "a07722a1-c0ff-484b-9907-2fa2ed0a467c",
-      "key": "stat.walk_rate",
-      "value_float": 0.129
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "a07722a1-c0ff-484b-9907-2fa2ed0a467c",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.327
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "a07722a1-c0ff-484b-9907-2fa2ed0a467c",
-      "key": "player.age",
-      "value_int": 26
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "a07722a1-c0ff-484b-9907-2fa2ed0a467c",
-      "key": "salary.usd",
-      "value_int": 5919081
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "4e653801-2f5b-4770-8d7a-16d4ed919c87",
-      "key": "stat.obp",
-      "value_float": 0.41
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "4e653801-2f5b-4770-8d7a-16d4ed919c87",
-      "key": "stat.slg",
-      "value_float": 0.416
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "4e653801-2f5b-4770-8d7a-16d4ed919c87",
-      "key": "stat.walk_rate",
-      "value_float": 0.15
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "4e653801-2f5b-4770-8d7a-16d4ed919c87",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.343
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "4e653801-2f5b-4770-8d7a-16d4ed919c87",
-      "key": "player.age",
-      "value_int": 32
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "4e653801-2f5b-4770-8d7a-16d4ed919c87",
-      "key": "salary.usd",
-      "value_int": 5745820
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "e1baeb34-a10b-4879-a587-45e8b9bd1be4",
-      "key": "stat.obp",
-      "value_float": 0.276
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "e1baeb34-a10b-4879-a587-45e8b9bd1be4",
-      "key": "stat.slg",
-      "value_float": 0.356
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "e1baeb34-a10b-4879-a587-45e8b9bd1be4",
-      "key": "stat.walk_rate",
-      "value_float": 0.179
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "e1baeb34-a10b-4879-a587-45e8b9bd1be4",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.107
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "e1baeb34-a10b-4879-a587-45e8b9bd1be4",
-      "key": "player.age",
-      "value_int": 34
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "e1baeb34-a10b-4879-a587-45e8b9bd1be4",
-      "key": "salary.usd",
-      "value_int": 9745748
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "ba2647e0-1b41-432a-ac8a-124f136239d5",
-      "key": "stat.obp",
-      "value_float": 0.417
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "ba2647e0-1b41-432a-ac8a-124f136239d5",
-      "key": "stat.slg",
-      "value_float": 0.643
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "ba2647e0-1b41-432a-ac8a-124f136239d5",
-      "key": "stat.walk_rate",
-      "value_float": 0.129
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "ba2647e0-1b41-432a-ac8a-124f136239d5",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.188
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "ba2647e0-1b41-432a-ac8a-124f136239d5",
-      "key": "player.age",
-      "value_int": 37
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "ba2647e0-1b41-432a-ac8a-124f136239d5",
-      "key": "salary.usd",
-      "value_int": 6737526
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "1ff8a5cb-a82b-467f-bb6d-589285e5c09d",
-      "key": "stat.obp",
-      "value_float": 0.412
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "1ff8a5cb-a82b-467f-bb6d-589285e5c09d",
-      "key": "stat.slg",
-      "value_float": 0.554
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "1ff8a5cb-a82b-467f-bb6d-589285e5c09d",
-      "key": "stat.walk_rate",
-      "value_float": 0.045
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "1ff8a5cb-a82b-467f-bb6d-589285e5c09d",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.287
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "1ff8a5cb-a82b-467f-bb6d-589285e5c09d",
-      "key": "player.age",
-      "value_int": 24
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "1ff8a5cb-a82b-467f-bb6d-589285e5c09d",
-      "key": "salary.usd",
-      "value_int": 5403879
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "e6fc8eda-023a-4a4f-a8c3-2c3e8384377e",
-      "key": "stat.obp",
-      "value_float": 0.417
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "e6fc8eda-023a-4a4f-a8c3-2c3e8384377e",
-      "key": "stat.slg",
-      "value_float": 0.374
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "e6fc8eda-023a-4a4f-a8c3-2c3e8384377e",
-      "key": "stat.walk_rate",
-      "value_float": 0.068
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "e6fc8eda-023a-4a4f-a8c3-2c3e8384377e",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.173
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "e6fc8eda-023a-4a4f-a8c3-2c3e8384377e",
-      "key": "player.age",
-      "value_int": 27
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "e6fc8eda-023a-4a4f-a8c3-2c3e8384377e",
-      "key": "salary.usd",
-      "value_int": 9246869
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "8f0f2dbe-2931-4c18-a1f0-56c10537764b",
-      "key": "stat.obp",
-      "value_float": 0.363
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "8f0f2dbe-2931-4c18-a1f0-56c10537764b",
-      "key": "stat.slg",
-      "value_float": 0.592
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "8f0f2dbe-2931-4c18-a1f0-56c10537764b",
-      "key": "stat.walk_rate",
-      "value_float": 0.039
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "8f0f2dbe-2931-4c18-a1f0-56c10537764b",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.285
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "8f0f2dbe-2931-4c18-a1f0-56c10537764b",
-      "key": "player.age",
-      "value_int": 34
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "8f0f2dbe-2931-4c18-a1f0-56c10537764b",
-      "key": "salary.usd",
-      "value_int": 8067831
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "4541d5aa-c655-4860-ba7c-b30793aaa6a4",
-      "key": "stat.obp",
-      "value_float": 0.358
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "4541d5aa-c655-4860-ba7c-b30793aaa6a4",
-      "key": "stat.slg",
-      "value_float": 0.589
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "4541d5aa-c655-4860-ba7c-b30793aaa6a4",
-      "key": "stat.walk_rate",
-      "value_float": 0.162
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "4541d5aa-c655-4860-ba7c-b30793aaa6a4",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.133
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "4541d5aa-c655-4860-ba7c-b30793aaa6a4",
-      "key": "player.age",
-      "value_int": 24
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "4541d5aa-c655-4860-ba7c-b30793aaa6a4",
-      "key": "salary.usd",
-      "value_int": 6448851
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "2e08d562-ab2b-4b12-b90f-fd1a150eba1a",
-      "key": "stat.obp",
-      "value_float": 0.344
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "2e08d562-ab2b-4b12-b90f-fd1a150eba1a",
-      "key": "stat.slg",
-      "value_float": 0.364
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "2e08d562-ab2b-4b12-b90f-fd1a150eba1a",
-      "key": "stat.walk_rate",
-      "value_float": 0.031
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "2e08d562-ab2b-4b12-b90f-fd1a150eba1a",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.3
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "2e08d562-ab2b-4b12-b90f-fd1a150eba1a",
-      "key": "player.age",
-      "value_int": 25
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "2e08d562-ab2b-4b12-b90f-fd1a150eba1a",
-      "key": "salary.usd",
-      "value_int": 1999162
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "79479f06-0ae8-409c-a41f-479397071831",
-      "key": "stat.obp",
-      "value_float": 0.283
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "79479f06-0ae8-409c-a41f-479397071831",
-      "key": "stat.slg",
-      "value_float": 0.322
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "79479f06-0ae8-409c-a41f-479397071831",
-      "key": "stat.walk_rate",
-      "value_float": 0.132
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "79479f06-0ae8-409c-a41f-479397071831",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.233
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "79479f06-0ae8-409c-a41f-479397071831",
-      "key": "player.age",
-      "value_int": 35
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "79479f06-0ae8-409c-a41f-479397071831",
-      "key": "salary.usd",
-      "value_int": 9486774
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "8621bdb1-a3cd-44af-a991-7680ce6d5aee",
-      "key": "stat.obp",
-      "value_float": 0.366
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "8621bdb1-a3cd-44af-a991-7680ce6d5aee",
-      "key": "stat.slg",
-      "value_float": 0.387
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "8621bdb1-a3cd-44af-a991-7680ce6d5aee",
-      "key": "stat.walk_rate",
-      "value_float": 0.072
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "8621bdb1-a3cd-44af-a991-7680ce6d5aee",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.293
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "8621bdb1-a3cd-44af-a991-7680ce6d5aee",
-      "key": "player.age",
-      "value_int": 36
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "8621bdb1-a3cd-44af-a991-7680ce6d5aee",
-      "key": "salary.usd",
-      "value_int": 5617849
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "2c588648-f2a8-421a-9072-8e87ca5d44f2",
-      "key": "stat.obp",
-      "value_float": 0.43
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "2c588648-f2a8-421a-9072-8e87ca5d44f2",
-      "key": "stat.slg",
-      "value_float": 0.322
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "2c588648-f2a8-421a-9072-8e87ca5d44f2",
-      "key": "stat.walk_rate",
-      "value_float": 0.079
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "2c588648-f2a8-421a-9072-8e87ca5d44f2",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.343
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "2c588648-f2a8-421a-9072-8e87ca5d44f2",
-      "key": "player.age",
-      "value_int": 36
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "2c588648-f2a8-421a-9072-8e87ca5d44f2",
-      "key": "salary.usd",
-      "value_int": 2673047
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "7040d2a7-7464-4f99-8a46-b95cc6ad30cd",
-      "key": "stat.obp",
-      "value_float": 0.357
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "7040d2a7-7464-4f99-8a46-b95cc6ad30cd",
-      "key": "stat.slg",
-      "value_float": 0.583
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "7040d2a7-7464-4f99-8a46-b95cc6ad30cd",
-      "key": "stat.walk_rate",
-      "value_float": 0.106
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "7040d2a7-7464-4f99-8a46-b95cc6ad30cd",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.162
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "7040d2a7-7464-4f99-8a46-b95cc6ad30cd",
-      "key": "player.age",
-      "value_int": 36
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "7040d2a7-7464-4f99-8a46-b95cc6ad30cd",
-      "key": "salary.usd",
-      "value_int": 10561638
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "7dfb8768-159e-4390-b3f6-1284ab6ef735",
-      "key": "stat.obp",
-      "value_float": 0.309
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "7dfb8768-159e-4390-b3f6-1284ab6ef735",
-      "key": "stat.slg",
-      "value_float": 0.496
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "7dfb8768-159e-4390-b3f6-1284ab6ef735",
-      "key": "stat.walk_rate",
-      "value_float": 0.171
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "7dfb8768-159e-4390-b3f6-1284ab6ef735",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.31
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "7dfb8768-159e-4390-b3f6-1284ab6ef735",
-      "key": "player.age",
-      "value_int": 24
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "7dfb8768-159e-4390-b3f6-1284ab6ef735",
-      "key": "salary.usd",
-      "value_int": 5203821
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "f703af40-2e75-4ebc-adf2-b513546b6010",
-      "key": "stat.obp",
-      "value_float": 0.32
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "f703af40-2e75-4ebc-adf2-b513546b6010",
-      "key": "stat.slg",
-      "value_float": 0.535
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "f703af40-2e75-4ebc-adf2-b513546b6010",
-      "key": "stat.walk_rate",
-      "value_float": 0.094
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "f703af40-2e75-4ebc-adf2-b513546b6010",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.153
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "f703af40-2e75-4ebc-adf2-b513546b6010",
-      "key": "player.age",
-      "value_int": 29
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "f703af40-2e75-4ebc-adf2-b513546b6010",
-      "key": "salary.usd",
-      "value_int": 9482854
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "9ca3d0b7-941b-4c9b-8c17-59de99c9bdb2",
-      "key": "stat.obp",
-      "value_float": 0.289
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "9ca3d0b7-941b-4c9b-8c17-59de99c9bdb2",
-      "key": "stat.slg",
-      "value_float": 0.551
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "9ca3d0b7-941b-4c9b-8c17-59de99c9bdb2",
-      "key": "stat.walk_rate",
-      "value_float": 0.129
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "9ca3d0b7-941b-4c9b-8c17-59de99c9bdb2",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.136
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "9ca3d0b7-941b-4c9b-8c17-59de99c9bdb2",
-      "key": "player.age",
-      "value_int": 24
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "9ca3d0b7-941b-4c9b-8c17-59de99c9bdb2",
-      "key": "salary.usd",
-      "value_int": 11621896
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "d15da2be-07cd-4d5b-86c2-f37266b75e4d",
-      "key": "stat.obp",
-      "value_float": 0.441
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "d15da2be-07cd-4d5b-86c2-f37266b75e4d",
-      "key": "stat.slg",
-      "value_float": 0.439
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "d15da2be-07cd-4d5b-86c2-f37266b75e4d",
-      "key": "stat.walk_rate",
-      "value_float": 0.103
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "d15da2be-07cd-4d5b-86c2-f37266b75e4d",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.347
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "d15da2be-07cd-4d5b-86c2-f37266b75e4d",
-      "key": "player.age",
-      "value_int": 27
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "d15da2be-07cd-4d5b-86c2-f37266b75e4d",
-      "key": "salary.usd",
-      "value_int": 2231079
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "852f4323-80a5-497b-9c78-25f6c00fa1d2",
-      "key": "stat.obp",
-      "value_float": 0.358
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "852f4323-80a5-497b-9c78-25f6c00fa1d2",
-      "key": "stat.slg",
-      "value_float": 0.419
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "852f4323-80a5-497b-9c78-25f6c00fa1d2",
-      "key": "stat.walk_rate",
-      "value_float": 0.059
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "852f4323-80a5-497b-9c78-25f6c00fa1d2",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.18
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "852f4323-80a5-497b-9c78-25f6c00fa1d2",
-      "key": "player.age",
-      "value_int": 31
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "852f4323-80a5-497b-9c78-25f6c00fa1d2",
-      "key": "salary.usd",
-      "value_int": 576976
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "c8c410da-90a3-46a8-859f-13fb729b18d3",
-      "key": "stat.obp",
-      "value_float": 0.344
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "c8c410da-90a3-46a8-859f-13fb729b18d3",
-      "key": "stat.slg",
-      "value_float": 0.306
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "c8c410da-90a3-46a8-859f-13fb729b18d3",
-      "key": "stat.walk_rate",
-      "value_float": 0.08
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "c8c410da-90a3-46a8-859f-13fb729b18d3",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.256
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "c8c410da-90a3-46a8-859f-13fb729b18d3",
-      "key": "player.age",
-      "value_int": 36
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "c8c410da-90a3-46a8-859f-13fb729b18d3",
-      "key": "salary.usd",
-      "value_int": 11543025
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "3723b8e5-6947-4084-be21-f80540330d23",
-      "key": "stat.obp",
-      "value_float": 0.435
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "3723b8e5-6947-4084-be21-f80540330d23",
-      "key": "stat.slg",
-      "value_float": 0.38
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "3723b8e5-6947-4084-be21-f80540330d23",
-      "key": "stat.walk_rate",
-      "value_float": 0.161
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "3723b8e5-6947-4084-be21-f80540330d23",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.121
-    },
-    {
-      "owner_type": "node",
-      "owner_id": "3723b8e5-6947-4084-be21-f80540330d23",
-      "key": "player.age",
-      "value_int": 28
-    },
+      "owner_type": "node", "owner_id": "bbbb0001-0000-0000-0000-000000000073", "key": "threshold.ground_ball_rate_min",
+      "value": 0.55
+    }
+  ],
+  "contracts": [
     {
-      "owner_type": "node",
-      "owner_id": "3723b8e5-6947-4084-be21-f80540330d23",
-      "key": "salary.usd",
-      "value_int": 811202
+      "type": "player_contract",
+      "status": "active",
+      "action": "allow",
+      "blob": { "player": "Scott Hatteberg", "salary_musd": 0.95, "years": 1, "acquired_from": "FA", "rationale": "High OBP, low cost — Moneyball archetype" }
     },
     {
-      "owner_type": "node",
-      "owner_id": "32b6c235-d7d0-4bf6-b789-d1592c4c5ed1",
-      "key": "stat.obp",
-      "value_float": 0.311
+      "type": "player_contract",
+      "status": "active",
+      "action": "allow",
+      "blob": { "player": "David Justice",   "salary_musd": 3.25, "years": 1, "acquired_from": "FA", "rationale": "Veteran OBP at below-market rate" }
     },
     {
-      "owner_type": "node",
-      "owner_id": "32b6c235-d7d0-4bf6-b789-d1592c4c5ed1",
-      "key": "stat.slg",
-      "value_float": 0.345
+      "type": "player_contract",
+      "status": "active",
+      "action": "allow",
+      "blob": { "player": "Jeremy Giambi",   "salary_musd": 1.0,  "years": 1, "acquired_from": "KC", "rationale": "OBP comparable to his brother at a fraction of the cost" }
     },
     {
-      "owner_type": "node",
-      "owner_id": "32b6c235-d7d0-4bf6-b789-d1592c4c5ed1",
-      "key": "stat.walk_rate",
-      "value_float": 0.093
+      "type": "player_contract",
+      "status": "active",
+      "action": "allow",
+      "blob": { "player": "Chad Bradford",   "salary_musd": 0.32, "years": 1, "acquired_from": "CWS", "rationale": "Extreme ground ball rate, submariner mechanics undervalued by scouts" }
     },
     {
-      "owner_type": "node",
-      "owner_id": "32b6c235-d7d0-4bf6-b789-d1592c4c5ed1",
-      "key": "stat.strikeout_rate",
-      "value_float": 0.328
+      "type": "player_departure",
+      "status": "fulfilled",
+      "action": "allow",
+      "blob": { "player": "Jason Giambi",      "departed_to": "New York Yankees", "contract_musd": 120, "note": "Created the primary 1B/high-OBP gap this model addresses" }
     },
     {
-      "owner_type": "node",
-      "owner_id": "32b6c235-d7d0-4bf6-b789-d1592c4c5ed1",
-      "key": "player.age",
-      "value_int": 28
+      "type": "player_departure",
+      "status": "fulfilled",
+      "action": "allow",
+      "blob": { "player": "Johnny Damon",       "departed_to": "Boston Red Sox",   "contract_musd": 31, "note": "Created the CF/leadoff gap" }
     },
     {
-      "owner_type": "node",
-      "owner_id": "32b6c235-d7d0-4bf6-b789-d1592c4c5ed1",
-      "key": "salary.usd",
-      "value_int": 5079292
+      "type": "player_departure",
+      "status": "fulfilled",
+      "action": "allow",
+      "blob": { "player": "Jason Isringhausen", "departed_to": "St. Louis Cardinals", "contract_musd": 27, "note": "Created the Closer Coverage gap — see capability bbbb0001-...-000000000072" }
     }
   ]
 }

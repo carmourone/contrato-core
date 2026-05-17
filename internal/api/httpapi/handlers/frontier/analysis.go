@@ -322,6 +322,19 @@ func (h *Handler) Boundary(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	boundary := detectBoundary(nodes, g)
+	if boundary == nil {
+		boundary = []BoundaryNode{}
+	}
+	respond.OK(w, BoundaryResponse{
+		TenantID:      tenantID,
+		ModelID:       mv.ModelID,
+		ModelVersion:  mv.Version,
+		BoundaryNodes: boundary,
+	})
+}
+
+func detectBoundary(nodes []gNode, g graph.Graph[string, gNode]) []BoundaryNode {
 	adj, _ := g.AdjacencyMap()
 	pred, _ := g.PredecessorMap()
 
@@ -339,24 +352,14 @@ func (h *Handler) Boundary(w http.ResponseWriter, r *http.Request) {
 			desc = "Sink: no outbound edges — nothing follows from this node"
 		}
 		boundary = append(boundary, BoundaryNode{
-			NodeID:      n.ID,
-			NodeType:    n.Type,
-			InDegree:    inDeg,
-			OutDegree:   outDeg,
+			NodeID:    n.ID,
+			NodeType:  n.Type,
+			InDegree:  inDeg,
+			OutDegree: outDeg,
 			Description: desc,
 		})
 	}
-
-	_ = edges // used via loadGraph
-	if boundary == nil {
-		boundary = []BoundaryNode{}
-	}
-	respond.OK(w, BoundaryResponse{
-		TenantID:      tenantID,
-		ModelID:       mv.ModelID,
-		ModelVersion:  mv.Version,
-		BoundaryNodes: boundary,
-	})
+	return boundary
 }
 
 // --- Implied edge detection ---

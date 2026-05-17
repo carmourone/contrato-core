@@ -19,6 +19,7 @@ type Store interface {
 	Contracts() ContractRepo
 	Objects() ObjectRepo
 	Graph() GraphRepo
+	Embeddings() EmbeddingRepo
 
 	BeginTx(ctx context.Context, opts TxOptions) (Tx, error)
 }
@@ -198,4 +199,21 @@ type GraphRepo interface {
 	GetNode(ctx context.Context, tenantID, id string) (Node, error) // latest
 	PutEdge(ctx context.Context, e Edge, opts PutOptions) (Edge, error) // append-only
 	OutEdges(ctx context.Context, tenantID, fromID, domain, typ string, page Page) ([]Edge, string, error)
+}
+
+type NodeMatch struct {
+	Node
+	Similarity float64 `json:"similarity"`
+}
+
+type EdgeMatch struct {
+	Edge
+	Similarity float64 `json:"similarity"`
+}
+
+type EmbeddingRepo interface {
+	SetNodeEmbedding(ctx context.Context, tenantID, nodeID, model string, vec []float32) error
+	SearchNodes(ctx context.Context, tenantID string, vec []float32, limit int) ([]NodeMatch, error)
+	SetEdgeEmbedding(ctx context.Context, tenantID, fromID, toID, domain, typ, model string, vec []float32) error
+	SearchEdges(ctx context.Context, tenantID string, vec []float32, limit int) ([]EdgeMatch, error)
 }

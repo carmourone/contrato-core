@@ -1,0 +1,23 @@
+## Meridian
+- [ ] Implement resolver: BuildPlan + Execute in internal/resolution/
+- [ ] Wire POST /v0/resolve and POST /v0/simulate (currently 501 stubs)
+
+## API
+- [ ] GET /v0/graph/nodes (list all) — needs cursor pagination, currently 501
+- [ ] HTTP server timeouts: ReadTimeout, WriteTimeout, IdleTimeout in server.go
+
+## Auth
+- [ ] JWT license key validation in config.LicenseConfig.Features()
+- [ ] Replace noop authn/authz providers with real implementations
+
+## Storage
+- [ ] Fix TOCTOU race in optimistic concurrency control (needs FOR UPDATE or serializable tx)
+- [ ] Fix GetLatestEnabled ordering: version DESC not created_at DESC
+
+## Graph promotion
+- [ ] Bundle import/export as the promotion mechanism between personas (Frontier → Waypoint → Meridian)
+
+## Tests
+- [ ] Unit tests for Frontier graph analysis (holes, boundary, implied edges)
+- [ ] Unit tests for Waypoint gap detection and path finding
+- [ ] Integration tests against a real Postgres instance

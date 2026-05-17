@@ -57,6 +57,13 @@ func NewServer(addr string, st storage.Store, an authn.Provider, az authz.Engine
 		r.Post("/graph/edges", gh.CreateEdge)
 		r.Put("/graph/edges/{from}/{to}/{type}", gh.UpdateEdge)
 
+		// embeddings — all personas
+		eh := &handlers.EmbeddingsHandler{Store: st}
+		r.Put("/graph/nodes/{id}/embedding", eh.SetNodeEmbedding)
+		r.Post("/graph/nodes/similar", eh.SearchNodes)
+		r.Put("/graph/edges/{from}/{to}/{domain}/{type}/embedding", eh.SetEdgeEmbedding)
+		r.Post("/graph/edges/similar", eh.SearchEdges)
+
 		// properties — all personas
 		ph := &handlers.PropertiesHandler{Store: st}
 		r.Get("/properties/{owner_type}/{owner_id}/{key}", ph.Get)

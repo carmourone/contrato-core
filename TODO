@@ -14,6 +14,10 @@
 - [ ] Fix TOCTOU race in optimistic concurrency control (needs FOR UPDATE or serializable tx)
 - [ ] Fix GetLatestEnabled ordering: version DESC not created_at DESC
 
+## Embeddings
+- [ ] Add HNSW index once embedding model/dimension is chosen (see 0002_embeddings.sql comments)
+- [ ] Optionally integrate a local embedding model (e.g. ollama + nomic-embed-text) for auto-embedding on node upsert
+
 ## Graph promotion
 - [ ] Bundle import/export as the promotion mechanism between personas (Frontier → Waypoint → Meridian)
 
